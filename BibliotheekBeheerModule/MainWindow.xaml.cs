@@ -31,10 +31,5 @@ namespace BibliotheekBeheerModule
             AllItems window = new AllItems();
             window.Show();
         }
-        private void showAllIWindow(object sender, RoutedEventArgs e)
-        {
-            AllItems window = new AllItems();
-            window.Show();
-        }
     }
 }

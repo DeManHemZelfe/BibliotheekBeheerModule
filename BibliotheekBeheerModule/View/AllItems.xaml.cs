@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using BibliotheekBeheerModule.Model;
+using BibliotheekBeheerModule.DbContexts;
+using System.ComponentModel;
 
 namespace BibliotheekBeheerModule.View
 {
@@ -24,15 +26,16 @@ namespace BibliotheekBeheerModule.View
         public AllItems()
         {
             InitializeComponent();
-            DataContext = this;
+            ItemDbContext itemDbContext = new ItemDbContext();
+            var items = itemDbContext.Items.ToList();
             Init();
-            ObservableCollection<Author> AllAuthors = new ObservableCollection<Author>();
             FillItems();
+            DataContext = this;
         }
 
         private void Init()
         {
-            AllItemsGrid = new ObservableCollection<Item>();
+
             
 
     }
@@ -45,7 +48,7 @@ namespace BibliotheekBeheerModule.View
                 LastName = "Gogh",
             };
 
-            Item item = new Item()
+            Item item4 = new Item()
             {
                 Name = "Dave in het donker",
                 Type = "CD",
@@ -64,20 +67,44 @@ namespace BibliotheekBeheerModule.View
                 Type = "DVD",
                 Author = author.FullName,
             };
+            using (var context = new ItemDbContext())
+            {
+                var item = new Item
+                {
+                    Name = "Nieuw item",
+                    Type = "Boek",
+                    Author = "Johan",
+                };
 
+                context.Items.Add(item);
+                try 
+                {
 
-            AllItemsGrid.Add(item);
-            AllItemsGrid.Add(item2);
-            AllItemsGrid.Add(item3);
+                    context.SaveChanges();
+                } catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+      
+            }
         }
+        private ObservableCollection<Item> _items;
 
-        public ObservableCollection<Item> AllItemsGrid
+        public ObservableCollection<Item> Items
         {
-            get { return (ObservableCollection<Item>)GetValue(AllItemsProperty); }
-            set { SetValue(AllItemsProperty, value); }
+            get { return _items; }
+            set
+            {
+                _items = value;
+                OnPropertyChanged(nameof(Items));
+            }
         }
 
-        public static DependencyProperty AllItemsProperty =
-            DependencyProperty.Register("AllItemsGrid", typeof(ObservableCollection<Item>), typeof(AllItems), new PropertyMetadata(null));
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

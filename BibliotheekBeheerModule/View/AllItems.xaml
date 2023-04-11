@@ -7,7 +7,13 @@
         mc:Ignorable="d"
         Title="AllItems" Height="450" Width="800">
     <Grid>
-        <DataGrid Name="ItemList" ItemsSource="{Binding AllItemsGrid}"></DataGrid>
+        <DataGrid Name="ItemList" ItemsSource="{Binding Items}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}" />
+                <DataGridTextColumn Header="Author" Binding="{Binding Author}" />
+            </DataGrid.Columns>
+        </DataGrid>
         
     </Grid>
 </Window>
