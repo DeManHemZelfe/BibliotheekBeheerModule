@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BibliotheekBeheerModule.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,17 @@ namespace BibliotheekBeheerModule
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void showAllItemsWindow(object sender, RoutedEventArgs e)
+        {
+            AllItems window = new AllItems();
+            window.Show();
+        }
+        private void showAllIWindow(object sender, RoutedEventArgs e)
+        {
+            AllItems window = new AllItems();
+            window.Show();
         }
     }
 }
