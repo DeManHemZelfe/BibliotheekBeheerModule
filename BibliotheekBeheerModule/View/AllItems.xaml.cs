@@ -30,37 +30,45 @@ namespace BibliotheekBeheerModule.View
             FillItems();
         }
 
-        private async void Init()
+        private void Init()
         {
             AllItemsGrid = new ObservableCollection<Item>();
             
 
     }
-    private async void FillItems() 
+    private void FillItems() 
         {
             Author author = new Author()
             {
-                firstName = "Vincent",
-                infix = "van",
-                lastName = "Gogh",
+                FirstName = "Vincent",
+                Infix = "van",
+                LastName = "Gogh",
             };
 
             Item item = new Item()
             {
-                name = "Dave in het donker",
-                type = "CD",
-                author = author.FullName,
+                Name = "Dave in het donker",
+                Type = "CD",
+                Author = author.FullName,
             };
             Item item2 = new Item()
             {
-                name = "Dave in het licht",
-                type = "CD",
-                author = author.FullName,
+                Name = "Dave in het licht",
+                Type = "CD",
+                Author = author.FullName,
+            };
+
+            Item item3 = new Item()
+            {
+                Name = "Dave en Niels op avontuut",
+                Type = "DVD",
+                Author = author.FullName,
             };
 
 
             AllItemsGrid.Add(item);
             AllItemsGrid.Add(item2);
+            AllItemsGrid.Add(item3);
         }
 
         public ObservableCollection<Item> AllItemsGrid

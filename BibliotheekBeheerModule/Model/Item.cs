@@ -9,9 +9,10 @@ namespace BibliotheekBeheerModule.Model
 {
     public partial class Item
     {
-        public string name { get; set; }
-        public string type { get; set; }
-        public string author { get; set; }
-        public event PropertyChangedEventHandler PropertyChanged;
+        public string Name { get; set; }
+        public string Type { get; set; }
+        public string Author { get; set; }
+
+        // public event PropertyChangedEventHandler PropertyChanged;
     }
 }

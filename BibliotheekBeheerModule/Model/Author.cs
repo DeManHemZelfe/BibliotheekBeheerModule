@@ -15,18 +15,19 @@ namespace BibliotheekBeheerModule.Model
 {
     public partial class Author
     {
-        public string firstName { get; set; }
-        public string infix { get; set; }
-        public string lastName { get; set; }
+        public string FirstName { get; set; }
+        public string Infix { get; set; }
+        public string LastName { get; set; }
         public string FullName
         {
-            get { return $"{firstName} {infix} {lastName}"; } // retourneer de volledige naam als een string
+            get { return $"{FirstName} {Infix} {LastName}"; } // retourneer de volledige naam als een string
         }
+
         public ObservableCollection<Item> Items { get; set; }
         public Author()
         {
             Items = new ObservableCollection<Item>();
         }
-        public event PropertyChangedEventHandler PropertyChanged;
+        // public event PropertyChangedEventHandler PropertyChanged;
     }
 }
