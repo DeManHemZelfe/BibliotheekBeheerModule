@@ -26,8 +26,6 @@ namespace BibliotheekBeheerModule.View
         public AllItems()
         {
             InitializeComponent();
-            ItemDbContext itemDbContext = new ItemDbContext();
-            var items = itemDbContext.Items.ToList();
             Init();
             FillItems();
             DataContext = this;
@@ -35,11 +33,10 @@ namespace BibliotheekBeheerModule.View
 
         private void Init()
         {
-
-            
-
-    }
-    private void FillItems() 
+            ItemDbContext itemDbContext = new ItemDbContext();
+            Items = new ObservableCollection<Item>(itemDbContext.Items);
+        }
+        private void FillItems()
         {
             Author author = new Author()
             {
@@ -67,27 +64,34 @@ namespace BibliotheekBeheerModule.View
                 Type = "DVD",
                 Author = author.FullName,
             };
+            Items.Add(item2);   
+        }
+        public void SaveChanges() {}
+        private void DeleteRow() { }
+        private void AddBook()
+        {
             using (var context = new ItemDbContext())
             {
                 var item = new Item
                 {
-                    Name = "Nieuw item",
+                    Name = "Dave is een pannenkoek",
                     Type = "Boek",
-                    Author = "Johan",
+                    Author = "Rene van der gijp",
                 };
-
-                context.Items.Add(item);
-                try 
+                try
                 {
-
+                    context.Items.Add(item);
                     context.SaveChanges();
-                } catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex);
                 }
-      
+
             }
         }
+        
+
         private ObservableCollection<Item> _items;
 
         public ObservableCollection<Item> Items
