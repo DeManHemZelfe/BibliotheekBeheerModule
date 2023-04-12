@@ -26,7 +26,7 @@ namespace BibliotheekBeheerModule
             InitializeComponent();
         }
 
-        private void showAllItemsWindow(object sender, RoutedEventArgs e)
+        private void ShowAllItemsWindow(object sender, RoutedEventArgs e)
         {
             AllItems window = new AllItems();
             window.Show();
