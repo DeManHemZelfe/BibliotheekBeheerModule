@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Type = BibliotheekBeheerModule.Model.Type;
 
 namespace BibliotheekBeheerModule.View
 {
@@ -27,12 +28,27 @@ namespace BibliotheekBeheerModule.View
         {
             InitializeComponent();
             Init();
+            DataContext = this;
         }
         public void Init()
         {
             TableDbContext tableDbContext = new TableDbContext();
             Items = new ObservableCollection<Item>(tableDbContext.Items);
             Authors = new ObservableCollection<Author>(tableDbContext.Authors);
+            Types = new ObservableCollection<Type>(tableDbContext.Types);
+        }
+        private void AddType() 
+        {
+            using (var db = new TableDbContext())
+            {
+                var type = new Type
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Dave van der ottenhof",
+                };
+                db.Types.Add(type);
+                db.SaveChanges();
+            }
         }
 
         private void AddNewItem(object sender, RoutedEventArgs e)
@@ -59,6 +75,17 @@ namespace BibliotheekBeheerModule.View
         }
 
 
+        private ObservableCollection<Type> _types;
+
+        public ObservableCollection<Type> Types
+        {
+            get { return _types; }
+            set
+            {
+                _types = value;
+                OnPropertyChanged(nameof(Types));
+            }
+        }
         private ObservableCollection<Item> _items;
 
         public ObservableCollection<Item> Items
