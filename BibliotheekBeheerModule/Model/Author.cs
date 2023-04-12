@@ -10,11 +10,14 @@ using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using BibliotheekBeheerModule.Model;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace BibliotheekBeheerModule.Model
 {
     public partial class Author
     {
+        [Key]
+        public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string Infix { get; set; }
         public string LastName { get; set; }

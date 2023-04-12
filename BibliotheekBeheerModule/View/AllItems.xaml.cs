@@ -27,50 +27,20 @@ namespace BibliotheekBeheerModule.View
         {
             InitializeComponent();
             Init();
-            FillItems();
             DataContext = this;
         }
 
         private void Init()
         {
-            ItemDbContext itemDbContext = new ItemDbContext();
-            Items = new ObservableCollection<Item>(itemDbContext.Items);
+            TableDbContext tableDbContext = new TableDbContext();
+            Items = new ObservableCollection<Item>(tableDbContext.Items);
         }
-        private void FillItems()
-        {
-            Author author = new Author()
-            {
-                FirstName = "Vincent",
-                Infix = "van",
-                LastName = "Gogh",
-            };
 
-            Item item4 = new Item()
-            {
-                Name = "Dave in het donker",
-                Type = "CD",
-                Author = author.FullName,
-            };
-            Item item2 = new Item()
-            {
-                Name = "Dave in het licht",
-                Type = "CD",
-                Author = author.FullName,
-            };
-
-            Item item3 = new Item()
-            {
-                Name = "Dave en Niels op avontuut",
-                Type = "DVD",
-                Author = author.FullName,
-            };
-            Items.Add(item2);   
-        }
         public void SaveChanges() {}
         private void DeleteRow() { }
         private void AddBook()
         {
-            using (var context = new ItemDbContext())
+            using (var context = new TableDbContext())
             {
                 var item = new Item
                 {

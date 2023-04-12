@@ -9,8 +9,9 @@ using BibliotheekBeheerModule.Model;
 
 namespace BibliotheekBeheerModule.DbContexts
 {
-    public class ItemDbContext : DbContext
+    public class TableDbContext : DbContext
     {
         public DbSet<Item> Items { get; set; }
+        public DbSet<Author> Authors { get; set; }
     }
 }
