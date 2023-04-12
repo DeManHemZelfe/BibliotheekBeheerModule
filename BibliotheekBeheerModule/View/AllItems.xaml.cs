@@ -55,11 +55,10 @@ namespace BibliotheekBeheerModule.View
                     context.Items.Add(item);
                     context.SaveChanges();
                 }
-                catch (Exception ex)
+                catch (Exception exception)
                 {
-                    Console.WriteLine(ex);
+                    Console.WriteLine(exception);
                 }
-
             }
         }
         
