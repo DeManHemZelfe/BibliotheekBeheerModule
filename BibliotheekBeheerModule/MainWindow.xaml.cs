@@ -37,5 +37,11 @@ namespace BibliotheekBeheerModule
         {
 
         }
+        private void AddNewItemsPage(object sender, RoutedEventArgs e)
+        {
+            NewItemPage window = new NewItemPage();
+            window.Show();
+            this.Close();
+        }
     }
 }

@@ -72,7 +72,7 @@
                 Margin="20" 
                 BorderThickness="0" 
                 Padding="20">
-                <Button Click="Button_Click" 
+                <Button Click="AddNewItemsPage" 
                     Content="Voeg nieuwe items toe" 
                     FontSize="14" 
                     Foreground="White" 
