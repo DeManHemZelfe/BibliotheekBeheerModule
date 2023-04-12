@@ -6,14 +6,48 @@
         xmlns:local="clr-namespace:BibliotheekBeheerModule.View"
         mc:Ignorable="d"
         Title="AllItems" WindowState="Maximized" WindowStyle="ToolWindow" Height="450" Width="800">
-    <Grid>
-        <DataGrid Name="ItemList" ItemsSource="{Binding Items}" AutoGenerateColumns="False" IsReadOnly="True">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                <DataGridTextColumn Header="Type" Binding="{Binding Type}" />
-                <DataGridTextColumn Header="Author" Binding="{Binding Author}" />
-            </DataGrid.Columns>
-        </DataGrid>
-        
+    <Grid Background="#F5F5F5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Background="#2196F3" 
+            Height="60"
+            Padding="10"
+            Margin="0 0 0 20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Dashboard"
+                   Foreground="White" 
+                   FontSize="24" 
+                   FontWeight="Bold" 
+                   VerticalAlignment="Center"/>
+                <Button Content="Terug" 
+                        Background="#4CAF50"
+                        Foreground="White"
+                        Grid.ColumnSpan="1"
+                        Width="100"
+                        Margin="1750,0,0,0"
+                        Click="PrevPage"/>
+
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <DataGrid Name="ItemList" ItemsSource="{Binding Items}" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Type" Binding="{Binding Type}" />
+                    <DataGridTextColumn Header="Author" Binding="{Binding Author}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
     </Grid>
 </Window>

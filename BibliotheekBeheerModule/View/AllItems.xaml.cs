@@ -15,6 +15,7 @@ using System.Collections.ObjectModel;
 using BibliotheekBeheerModule.Model;
 using BibliotheekBeheerModule.DbContexts;
 using System.ComponentModel;
+using System.Windows.Navigation;
 
 namespace BibliotheekBeheerModule.View
 {
@@ -91,6 +92,13 @@ namespace BibliotheekBeheerModule.View
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void PrevPage(object sender, RoutedEventArgs e)
+        {
+            MainWindow window = new MainWindow();
+            window.Show();
+            this.Close();
         }
     }
 }
