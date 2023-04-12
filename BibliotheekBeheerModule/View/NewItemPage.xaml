@@ -6,7 +6,56 @@
         xmlns:local="clr-namespace:BibliotheekBeheerModule.View"
         mc:Ignorable="d"
         Title="NewItemPage" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Background="#F5F5F5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Background="#2196F3" 
+            Height="60"
+            Padding="10"
+            Margin="0 0 0 20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Dashboard"
+                   Foreground="White" 
+                   FontSize="24" 
+                   FontWeight="Bold" 
+                   VerticalAlignment="Center"/>
+                <Button Content="Terug"  Background="#4CAF50" Foreground="White" Grid.ColumnSpan="1"  Width="100" Margin="1750,0,0,0"/>
+
+            </Grid>
+        </Border>
+
+        <StackPanel Grid.Row="1">
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Titel:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="10" Name="itemTitel"/>
+
+                <TextBlock Text="Beschrijving:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="10"/>
+
+                <Button Content="Toevoegen" Background="#2196F3" Foreground="White" Grid.Row="2" Grid.Column="1" Margin="10" Click="AddNewItem"/>
+
+            </Grid>
+        </StackPanel>
+
     </Grid>
+
 </Window>
