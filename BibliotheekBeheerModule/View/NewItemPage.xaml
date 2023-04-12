@@ -49,20 +49,22 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Text="Titel:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Margin="10" Name="itemTitel"/>
+                <TextBox Name="itemTitle" Grid.Row="0" Grid.Column="1" Margin="10"/>
 
                 <TextBlock Text="Type:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
-                <ComboBox Grid.Row="1" Grid.Column="1" Margin="10" ItemsSource="{Binding Types}" DisplayMemberPath="Name" IsEditable="True" TextSearch.TextPath="Name">
-   
+                <ComboBox Name="itemType" Grid.Row="1" Grid.Column="1" Margin="10">
+                    <ComboBoxItem IsSelected="True">CD</ComboBoxItem>
+                    <ComboBoxItem>DVD</ComboBoxItem>
+                    <ComboBoxItem>Blue-Ray</ComboBoxItem>
                 </ComboBox>
 
                 <TextBlock Text="Beschrijving:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Margin="10"/>
+                <TextBox Name="itemDescription" Grid.Row="2" Grid.Column="1" Margin="10"/>
                 
                 <TextBlock Text="Author:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
-                <TextBox Grid.Row="3" Grid.Column="1" Margin="10"/>
+                <TextBox Name="itemAuthor" Grid.Row="3" Grid.Column="1" Margin="10"/>
 
-                <Button Content="Toevoegen" Background="#0057e7" Foreground="White" Grid.Row="4" Grid.Column="1" Margin="10" Click="AddNewItem"/>
+                <Button Content="Toevoegen" Background="#008744" Foreground="White" Grid.Row="4" Grid.Column="1" Margin="10" Click="AddNewItem"/>
 
             </Grid>
         </StackPanel>

@@ -1,0 +1,76 @@
+﻿<Window x:Class="BibliotheekBeheerModule.View.UpdateItemPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BibliotheekBeheerModule.View"
+        mc:Ignorable="d"
+        Title="UpdateItem" WindowState="Maximized" WindowStyle="ToolWindow" Height="450" Width="800">
+    <Grid Background="#F5F5F5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Background="#0057e7" 
+            Height="60"
+            Padding="10"
+            Margin="0 0 0 20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Update Item"
+                   Foreground="White" 
+                   FontSize="24" 
+                   FontWeight="Bold" 
+                   VerticalAlignment="Center"/>
+                <Button 
+                    Content="Terug" 
+                    Background="#4CAF50"
+                    Foreground="White"
+                    Grid.ColumnSpan="1"
+                    Width="100"
+                    Margin="1750,0,0,0"
+                    Click="BackToAllItems"/>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <StackPanel Grid.Row="1">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Titel:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                    <TextBox Name="ItemTitle" Grid.Row="0" Grid.Column="1" Margin="10" Text="{Binding Title}"/>
+
+                    <TextBlock Text="Type:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+                    <ComboBox  Name="ItemType" Grid.Row="1" Grid.Column="1" Margin="10" ItemsSource="{Binding Types}" DisplayMemberPath="Name" IsEditable="True" TextSearch.TextPath="Name">
+                        
+                    </ComboBox>
+
+                    <TextBlock Text="Beschrijving:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
+                    <TextBox Name="ItemDescription" Grid.Row="2" Grid.Column="1" Margin="10"/>
+
+                    <TextBlock Text="Author:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
+                    <TextBox Name="ItemAuthor" Grid.Row="3" Grid.Column="1" Margin="10"/>
+
+                    <Button Name="ItemUpdateButton" Content="Update" Tag="ItemId" Click="UpdateItem" Background="#0057e7" Foreground="White" Grid.Row="4" Grid.Column="1" Margin="10"/>
+
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

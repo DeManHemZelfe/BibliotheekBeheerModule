@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,81 +13,75 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Collections.ObjectModel;
-using BibliotheekBeheerModule.Model;
-using BibliotheekBeheerModule.DbContexts;
-using System.ComponentModel;
 using System.Windows.Navigation;
+using BibliotheekBeheerModule.DbContexts;
+using BibliotheekBeheerModule.Model;
+using Type = BibliotheekBeheerModule.Model.Type;
 
 namespace BibliotheekBeheerModule.View
 {
     /// <summary>
-    /// Interaction logic for AllItems.xaml
+    /// Interaction logic for UpdateItem.xaml
     /// </summary>
-    public partial class AllItems : Window
+    public partial class UpdateItemPage : Window
     {
-        public AllItems()
+        public UpdateItemPage()
         {
             InitializeComponent();
             Init();
             DataContext = this;
         }
 
-        private void Init()
+        public void Init()
         {
             TableDbContext tableDbContext = new TableDbContext();
             Items = new ObservableCollection<Item>(tableDbContext.Items);
             Authors = new ObservableCollection<Author>(tableDbContext.Authors);
+            Types = new ObservableCollection<Type>(tableDbContext.Types);
         }
 
-        public void SaveChanges() {}
-
-        private void UpdateRow(object sender, RoutedEventArgs e)
+        public void GetItemToUpdate(Guid ItemId)
         {
-            var button = (Button)sender;
-            var row = FindVisualParent<DataGridRow>(button);
-            var item = (Item)row.DataContext;
-
-            UpdateItemPage updateWindow = new UpdateItemPage();
-            updateWindow.Show();
-            updateWindow.GetItemToUpdate(item.Id);
-            this.Close();
+            using (var db = new TableDbContext())
+            {
+                var itemToUpdate = db.Items.Find(ItemId);
+                ItemTitle.Text = itemToUpdate.Name;
+                ItemType.Text = itemToUpdate.Type;
+                ItemDescription.Text = itemToUpdate.Description;
+                ItemAuthor.Text = itemToUpdate.Author;
+                ItemUpdateButton.Tag = ItemId;
+            }
         }
 
-        private void DeleteRow(object sender, RoutedEventArgs e)
+        private void UpdateItem(object sender, RoutedEventArgs e)
         {
-            var button = (Button)sender;
-            var row = FindVisualParent<DataGridRow>(button);
-            var item = (Item)row.DataContext;
+            Button btn = sender as Button;
+            Guid ItemId = new Guid(btn.Tag.ToString());
 
             using (var db = new TableDbContext())
             {
-                var itemToDelete = db.Items.Find(item.Id);
-                if (itemToDelete != null)
+                var itemToUpdate = db.Items.Find(ItemId);
+                if (itemToUpdate != null)
                 {
-                    db.Items.Attach(itemToDelete);
-                    db.Items.Remove(itemToDelete);
+                    itemToUpdate.Name = ItemTitle.Text;
+                    itemToUpdate.Type = ItemType.Text;
+                    itemToUpdate.Description = ItemDescription.Text;
+                    itemToUpdate.Author = ItemAuthor.Text;
                     db.SaveChanges();
                 }
-                Console.WriteLine(item.Name + " Removed");
-                Items.Remove(item);
             }
-
         }
 
-        private DataGridRow FindVisualParent<DataGridRow>(DependencyObject obj) where DataGridRow : DependencyObject
+        private ObservableCollection<Type> _types;
+        public ObservableCollection<Type> Types
         {
-            DependencyObject parent = VisualTreeHelper.GetParent(obj);
-
-            while (parent != null && !(parent is DataGridRow))
+            get { return _types; }
+            set
             {
-                parent = VisualTreeHelper.GetParent(parent);
+                _types = value;
+                OnPropertyChanged(nameof(Types));
             }
-
-            return parent as DataGridRow;
         }
-
-
         private ObservableCollection<Item> _items;
 
         public ObservableCollection<Item> Items
@@ -116,11 +112,16 @@ namespace BibliotheekBeheerModule.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void PrevPage(object sender, RoutedEventArgs e)
+        private void BackToAllItems(object sender, RoutedEventArgs e)
         {
-            MainWindow window = new MainWindow();
+            AllItems window = new AllItems();
             window.Show();
             this.Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
