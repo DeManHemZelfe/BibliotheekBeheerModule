@@ -2,6 +2,8 @@
 using BibliotheekBeheerModule.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +26,13 @@ namespace BibliotheekBeheerModule.View
         public NewItemPage()
         {
             InitializeComponent();
+            Init();
+        }
+        private void Init()
+        {
+            TableDbContext tableDbContext = new TableDbContext();
+            Items = new ObservableCollection<Item>(tableDbContext.Items);
+            Authors = new ObservableCollection<Author>(tableDbContext.Authors);
         }
         private void AddBook()
         {
@@ -45,6 +54,40 @@ namespace BibliotheekBeheerModule.View
                     Console.WriteLine(exception);
                 }
             }
+        }
+
+        private void AddNewItem(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private ObservableCollection<Item> _items;
+
+        public ObservableCollection<Item> Items
+        {
+            get { return _items; }
+            set
+            {
+                _items = value;
+                OnPropertyChanged(nameof(Items));
+            }
+        }
+        private ObservableCollection<Author> _authors;
+
+        public ObservableCollection<Author> Authors
+        {
+            get { return _authors; }
+            set
+            {
+                _authors = value;
+                OnPropertyChanged(nameof(Authors));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
