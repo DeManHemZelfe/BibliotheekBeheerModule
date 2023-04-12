@@ -24,7 +24,6 @@ namespace BibliotheekBeheerModule
         public MainWindow()
         {
             InitializeComponent();
-            Init();
         }
 
         private void showAllItemsWindow(object sender, RoutedEventArgs e)

@@ -28,38 +28,36 @@ namespace BibliotheekBeheerModule.View
             InitializeComponent();
             Init();
         }
-        private void Init()
+        public void Init()
         {
             TableDbContext tableDbContext = new TableDbContext();
             Items = new ObservableCollection<Item>(tableDbContext.Items);
             Authors = new ObservableCollection<Author>(tableDbContext.Authors);
         }
-        private void AddBook()
-        {
-            using (var context = new TableDbContext())
-            {
-                var item = new Item
-                {
-                    Name = "Dave is een pannenkoek",
-                    Type = "Boek",
-                    Author = "Rene van der gijp",
-                };
-                try
-                {
-                    context.Items.Add(item);
-                    context.SaveChanges();
-                }
-                catch (Exception exception)
-                {
-                    Console.WriteLine(exception);
-                }
-            }
-        }
 
         private void AddNewItem(object sender, RoutedEventArgs e)
         {
-
+            using (var db = new TableDbContext())
+            {
+                var item = new Item
+                {
+                    Name = itemTitel.ToString(),
+                    Type = "CD",
+                    Author = "Niels",
+                };
+                db.Items.Add(item);
+                db.SaveChanges();
+            }
         }
+
+        private void PrevPage(object sender, RoutedEventArgs e)
+        {
+            MainWindow window = new MainWindow();
+            window.Show();
+            this.Close();
+        }
+
+
         private ObservableCollection<Item> _items;
 
         public ObservableCollection<Item> Items
