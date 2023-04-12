@@ -31,6 +31,6 @@ namespace BibliotheekBeheerModule.Model
         {
             Items = new ObservableCollection<Item>();
         }
-        // public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

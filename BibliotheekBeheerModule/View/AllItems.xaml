@@ -7,12 +7,6 @@
         mc:Ignorable="d"
         Title="AllItems" WindowState="Maximized" WindowStyle="ToolWindow" Height="450" Width="800">
     
-    <Window.Resources>
-        <Style x:Key="MyDataGridStyle" TargetType="{x:Type DataGrid}">
-            <Setter Property="Background" Value="	#d62d20"/>
-            <!-- Other style properties and setters -->
-        </Style>
-    </Window.Resources>
     
     <Grid Background="#F5F5F5">
         <Grid.RowDefinitions>
@@ -20,7 +14,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Border Background="#2196F3" 
+        <Border Background="#0057e7" 
             Height="60"
             Padding="10"
             Margin="0 0 0 20">
@@ -48,15 +42,30 @@
         </Border>
 
         <Grid Grid.Row="1">
-            <DataGrid Name="ItemList" ItemsSource="{Binding Items}" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid Name="ItemList" ItemsSource="{Binding Items}" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="LightGray">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                    <DataGridTextColumn Header="Type" Binding="{Binding Type}" />
-                    <DataGridTextColumn Header="Author" Binding="{Binding Author}" />
-                    <DataGridTemplateColumn Header="Delete" >
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" MinWidth="100"/>
+                    <DataGridTextColumn Header="Type" Binding="{Binding Type}" MinWidth="100"/>
+                    <DataGridTextColumn Header="Author" Binding="{Binding Author}" MinWidth="100"/>
+                    <DataGridTemplateColumn Header="Update">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Delete" HorizontalAlignment="Right" Foreground="#ffffff" Background="#d62d20"/>
+                                <Button 
+                                    Content="Update" 
+                                    Foreground="#ffffff" 
+                                    Background="#0057e7"
+                                    Click="UpdateRow"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Delete">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button 
+                                    Content="Delete" 
+                                    Foreground="#ffffff" 
+                                    Background="#d62d20"
+                                    Click="DeleteRow"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

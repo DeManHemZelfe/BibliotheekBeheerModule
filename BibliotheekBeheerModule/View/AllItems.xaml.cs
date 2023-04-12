@@ -39,8 +39,63 @@ namespace BibliotheekBeheerModule.View
         }
 
         public void SaveChanges() {}
-        private void DeleteRow() { }
-        
+
+        private void UpdateRow(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            var row = FindVisualParent<DataGridRow>(button);
+            var item = (Item)row.DataContext;
+
+            using (var db = new TableDbContext())
+            {
+                var itemToUpdate = db.Items.Find(item.Id);
+                if (itemToUpdate != null)
+                {
+                    itemToUpdate.Name = "Changed Item";
+                    db.SaveChanges();
+                }
+                Console.WriteLine(item.Name + " Updated");
+                var FoundRow = Items.FirstOrDefault(rowToMatch => rowToMatch.Id == item.Id);
+                Console.WriteLine(FoundRow.Name);
+                FoundRow.Name = "Changed Item";
+                var NewFoundRow = Items.FirstOrDefault(rowToMatch => rowToMatch.Id == item.Id);
+                Console.WriteLine(NewFoundRow.Name);
+            }
+        }
+
+        private void DeleteRow(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            var row = FindVisualParent<DataGridRow>(button);
+            var item = (Item)row.DataContext;
+
+            using (var db = new TableDbContext())
+            {
+                var itemToDelete = db.Items.Find(item.Id);
+                if (itemToDelete != null)
+                {
+                    db.Items.Attach(itemToDelete);
+                    db.Items.Remove(itemToDelete);
+                    db.SaveChanges();
+                }
+                Console.WriteLine(item.Name + " Removed");
+                Items.Remove(item);
+            }
+
+        }
+
+        private DataGridRow FindVisualParent<DataGridRow>(DependencyObject obj) where DataGridRow : DependencyObject
+        {
+            DependencyObject parent = VisualTreeHelper.GetParent(obj);
+
+            while (parent != null && !(parent is DataGridRow))
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+            }
+
+            return parent as DataGridRow;
+        }
+
 
         private ObservableCollection<Item> _items;
 
