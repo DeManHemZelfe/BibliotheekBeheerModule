@@ -41,7 +41,8 @@ namespace BibliotheekBeheerModule.View
             {
                 var item = new Item
                 {
-                    Name = itemTitel.ToString(),
+                    Id = Guid.NewGuid(),
+                    Name = itemTitel.Text.ToString(),
                     Type = "CD",
                     Author = "Niels",
                 };

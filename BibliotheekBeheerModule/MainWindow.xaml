@@ -62,7 +62,7 @@
                 Margin="20" 
                 BorderThickness="0" 
                 Padding="20">
-                <Button Click="showAllItemsWindow" 
+                <Button Click="ShowAllItemsWindow" 
                     Content="Bekijk alle items" 
                     FontSize="14" 
                     Foreground="White" 
