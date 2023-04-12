@@ -43,5 +43,10 @@ namespace BibliotheekBeheerModule
             window.Show();
             this.Close();
         }
+
+        private void ExitProgram(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

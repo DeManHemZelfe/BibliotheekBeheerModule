@@ -32,8 +32,14 @@
                    FontSize="24" 
                    FontWeight="Bold" 
                    VerticalAlignment="Center"/>
-                <Button Content="Terug"  Background="#4CAF50" Foreground="White" Grid.ColumnSpan="1"  Width="100" Margin="1750,0,0,0"/>
-
+                <Button
+                    Content="Sluiten"  
+                    Background="#d62d20" 
+                    Foreground="White" 
+                    Grid.ColumnSpan="1"  
+                    Width="100" 
+                    Margin="1750,0,0,0"
+                    Click="ExitProgram"/>
             </Grid>
         </Border>
 
