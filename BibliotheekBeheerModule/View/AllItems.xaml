@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BibliotheekBeheerModule.View"
         mc:Ignorable="d"
-        Title="AllItems" Height="450" Width="800">
+        Title="AllItems" WindowState="Maximized" WindowStyle="ToolWindow" Height="450" Width="800">
     <Grid>
         <DataGrid Name="ItemList" ItemsSource="{Binding Items}" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>

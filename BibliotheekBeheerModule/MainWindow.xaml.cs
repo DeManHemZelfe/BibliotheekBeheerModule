@@ -30,6 +30,12 @@ namespace BibliotheekBeheerModule
         {
             AllItems window = new AllItems();
             window.Show();
+            this.Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

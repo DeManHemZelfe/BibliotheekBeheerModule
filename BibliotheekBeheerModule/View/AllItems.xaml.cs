@@ -34,6 +34,7 @@ namespace BibliotheekBeheerModule.View
         {
             TableDbContext tableDbContext = new TableDbContext();
             Items = new ObservableCollection<Item>(tableDbContext.Items);
+            Authors = new ObservableCollection<Author>(tableDbContext.Authors);
         }
 
         public void SaveChanges() {}
@@ -71,6 +72,17 @@ namespace BibliotheekBeheerModule.View
             {
                 _items = value;
                 OnPropertyChanged(nameof(Items));
+            }
+        }
+        private ObservableCollection<Author> _authors;
+
+        public ObservableCollection<Author> Authors
+        {
+            get { return _authors; }
+            set
+            {
+                _authors = value;
+                OnPropertyChanged(nameof(Authors));
             }
         }
 
