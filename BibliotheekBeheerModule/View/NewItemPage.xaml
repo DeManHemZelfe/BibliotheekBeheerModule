@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BibliotheekBeheerModule.View"
         mc:Ignorable="d"
-        Title="NewItemPage" Height="450" Width="800">
+        Title="NewItemPage" WindowState="Maximized" Height="450" Width="800">
     <Grid Background="#F5F5F5">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
