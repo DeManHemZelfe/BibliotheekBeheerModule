@@ -40,27 +40,6 @@ namespace BibliotheekBeheerModule.View
 
         public void SaveChanges() {}
         private void DeleteRow() { }
-        private void AddBook()
-        {
-            using (var context = new TableDbContext())
-            {
-                var item = new Item
-                {
-                    Name = "Dave is een pannenkoek",
-                    Type = "Boek",
-                    Author = "Rene van der gijp",
-                };
-                try
-                {
-                    context.Items.Add(item);
-                    context.SaveChanges();
-                }
-                catch (Exception exception)
-                {
-                    Console.WriteLine(exception);
-                }
-            }
-        }
         
 
         private ObservableCollection<Item> _items;

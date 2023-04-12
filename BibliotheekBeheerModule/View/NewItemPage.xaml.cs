@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BibliotheekBeheerModule.DbContexts;
+using BibliotheekBeheerModule.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +24,27 @@ namespace BibliotheekBeheerModule.View
         public NewItemPage()
         {
             InitializeComponent();
+        }
+        private void AddBook()
+        {
+            using (var context = new TableDbContext())
+            {
+                var item = new Item
+                {
+                    Name = "Dave is een pannenkoek",
+                    Type = "Boek",
+                    Author = "Rene van der gijp",
+                };
+                try
+                {
+                    context.Items.Add(item);
+                    context.SaveChanges();
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception);
+                }
+            }
         }
     }
 }
