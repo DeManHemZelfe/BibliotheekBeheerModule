@@ -42,33 +42,33 @@ namespace BibliotheekBeheerModule.View
         {
             using (var db = new TableDbContext())
             {
-                var authorToUpdate = db.Authors.Find(AuthorId);
-                authorFirstname.Text = authorToUpdate.FirstName;
-                authorInfix.Text = authorToUpdate.Infix;
-                authorLastname.Text = authorToUpdate.LastName;
+                var AuthorToUpdate = db.Authors.Find(AuthorId);
+                AuthorFirstname.Text = AuthorToUpdate.FirstName;
+                AuthorInfix.Text = AuthorToUpdate.Infix;
+                AuthorLastname.Text = AuthorToUpdate.LastName;
                 AuthorUpdateButton.Tag = AuthorId;
             }
         }
 
         private void UpdateAuthor(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
-            Guid AuthorId = new Guid(btn.Tag.ToString());
+            Button Btn = sender as Button;
+            Guid AuthorId = new Guid(Btn.Tag.ToString());
 
             using (var db = new TableDbContext())
             {
-                var authorToUpdate = db.Authors.Find(AuthorId);
-                var oldAuthor = authorToUpdate.FullName;
-                if (authorToUpdate != null)
+                var AuthorToUpdate = db.Authors.Find(AuthorId);
+                var oldAuthor = AuthorToUpdate.FullName;
+                if (AuthorToUpdate != null)
                 {
-                    authorToUpdate.FirstName = authorFirstname.Text;
-                    authorToUpdate.Infix = authorInfix.Text;
-                    authorToUpdate.LastName = authorLastname.Text;
+                    AuthorToUpdate.FirstName = AuthorFirstname.Text;
+                    AuthorToUpdate.Infix = AuthorInfix.Text;
+                    AuthorToUpdate.LastName = AuthorLastname.Text;
                     db.SaveChanges();
-                    foreach (var item in Items) 
-                        if(item.Author == oldAuthor)
+                    foreach (var Item in Items) 
+                        if(Item.Author == oldAuthor)
                         {
-                            item.Author = authorToUpdate.FullName;
+                            Item.Author = AuthorToUpdate.FullName;
                             db.SaveChanges();
                         }
                 }

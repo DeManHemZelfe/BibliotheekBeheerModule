@@ -43,7 +43,7 @@ namespace BibliotheekBeheerModule.View
         private void SearchItem(object sender, RoutedEventArgs e)
         {
 
-            string SearchTerm = itemSearch.Text;
+            string SearchTerm = ItemSearch.Text;
             if (!string.IsNullOrEmpty(SearchTerm))
             {
                 var FilteredItems = Items.Where(item =>
@@ -62,33 +62,33 @@ namespace BibliotheekBeheerModule.View
 
         private void UpdateRow(object sender, RoutedEventArgs e)
         {
-            var button = (Button)sender;
-            var row = FindVisualParent<DataGridRow>(button);
-            var item = (Item)row.DataContext;
+            var Button = (Button)sender;
+            var Row = FindVisualParent<DataGridRow>(Button);
+            var Item = (Item)Row.DataContext;
 
             UpdateItemPage updateWindow = new UpdateItemPage();
             updateWindow.Show();
-            updateWindow.GetItemToUpdate(item.Id);
+            updateWindow.GetItemToUpdate(Item.Id);
             this.Close();
         }
 
         private void DeleteRow(object sender, RoutedEventArgs e)
         {
-            var button = (Button)sender;
-            var row = FindVisualParent<DataGridRow>(button);
-            var item = (Item)row.DataContext;
+            var Button = (Button)sender;
+            var Row = FindVisualParent<DataGridRow>(Button);
+            var Item = (Item)Row.DataContext;
 
             using (var db = new TableDbContext())
             {
-                var itemToDelete = db.Items.Find(item.Id);
+                var itemToDelete = db.Items.Find(Item.Id);
                 if (itemToDelete != null)
                 {
                     db.Items.Attach(itemToDelete);
                     db.Items.Remove(itemToDelete);
                     db.SaveChanges();
                 }
-                Console.WriteLine(item.Name + " Removed");
-                Items.Remove(item);
+                Console.WriteLine(Item.Name + " Removed");
+                Items.Remove(Item);
             }
 
         }

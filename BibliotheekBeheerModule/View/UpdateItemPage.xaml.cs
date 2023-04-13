@@ -44,28 +44,28 @@ namespace BibliotheekBeheerModule.View
         {
             using (var db = new TableDbContext())
             {
-                var itemToUpdate = db.Items.Find(ItemId);
-                ItemTitle.Text = itemToUpdate.Name;
-                ItemType.Text = itemToUpdate.Type;
-                ItemDescription.Text = itemToUpdate.Description;
-                ItemAuthor.Text = itemToUpdate.Author;
+                var ItemToUpdate = db.Items.Find(ItemId);
+                ItemTitle.Text = ItemToUpdate.Name;
+                ItemType.Text = ItemToUpdate.Type;
+                ItemDescription.Text = ItemToUpdate.Description;
+                ItemAuthor.Text = ItemToUpdate.Author;
                 ItemUpdateButton.Tag = ItemId;
             }
         }
 
         private void UpdateItem(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
-            Guid ItemId = new Guid(btn.Tag.ToString());
+            Button Btn = sender as Button;
+            Guid ItemId = new Guid(Btn.Tag.ToString());
             using (var db = new TableDbContext())
             {
-                var itemToUpdate = db.Items.Find(ItemId);
-                if (itemToUpdate != null)
+                var ItemToUpdate = db.Items.Find(ItemId);
+                if (ItemToUpdate != null)
                 {
-                    itemToUpdate.Name = ItemTitle.Text;
-                    itemToUpdate.Type = ItemType.Text;
-                    itemToUpdate.Description = ItemDescription.Text;
-                    itemToUpdate.Author = ItemAuthor.Text;
+                    ItemToUpdate.Name = ItemTitle.Text;
+                    ItemToUpdate.Type = ItemType.Text;
+                    ItemToUpdate.Description = ItemDescription.Text;
+                    ItemToUpdate.Author = ItemAuthor.Text;
                     db.SaveChanges();
                 }
             }

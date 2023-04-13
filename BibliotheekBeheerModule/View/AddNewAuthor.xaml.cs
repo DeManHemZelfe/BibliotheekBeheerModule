@@ -41,14 +41,14 @@ namespace BibliotheekBeheerModule.View
         {
             using (var db = new TableDbContext())
             {
-                var item = new Author
+                var author = new Author
                 {
                     Id = Guid.NewGuid(),
                     FirstName = authorFirstname.Text.ToString(),
                     Infix = authorInfix.Text.ToString(),
                     LastName = authorLastname.Text.ToString(),
                 };
-                db.Authors.Add(item);
+                db.Authors.Add(author);
                 db.SaveChanges();
             }
             BackToMainMenu();

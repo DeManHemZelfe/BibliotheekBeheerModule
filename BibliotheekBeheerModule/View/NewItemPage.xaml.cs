@@ -42,9 +42,9 @@ namespace BibliotheekBeheerModule.View
         {
             using (var db = new TableDbContext())
             {
-                foreach (var author in Authors) 
+                foreach (var Author in Authors) 
                 {
-                    if (author.FullName == itemAuthor.Text)
+                    if (Author.FullName == itemAuthor.Text)
                     {
                         var item = new Item
                         {
@@ -52,7 +52,7 @@ namespace BibliotheekBeheerModule.View
                             Name = itemTitle.Text.ToString(),
                             Type = itemType.Text.ToString().Length < 1 ? "CD" : itemType.Text.ToString(),
                             Description = itemDescription.Text.ToString(),
-                            Author = author.FullName,
+                            Author = Author.FullName,
                         };
                         db.Items.Add(item);
                         db.SaveChanges();
