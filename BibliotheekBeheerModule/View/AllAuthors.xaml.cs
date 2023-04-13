@@ -65,7 +65,12 @@ namespace BibliotheekBeheerModule.View
                 Console.WriteLine(author.FullName + " Removed");
                 Authors.Remove(author);
             }
-
+        }
+        private void PrevPage(object sender, RoutedEventArgs e)
+        {
+            MainWindow window = new MainWindow();
+            window.Show();
+            this.Close();
         }
         private DataGridRow FindVisualParent<DataGridRow>(DependencyObject obj) where DataGridRow : DependencyObject
         {
