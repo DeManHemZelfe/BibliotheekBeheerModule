@@ -7,13 +7,13 @@ namespace BibliotheekBeheerModule.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class MakeFinalMG : IMigrationMetadata
+    public sealed partial class MakeMG : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(MakeFinalMG));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(MakeMG));
         
         string IMigrationMetadata.Id
         {
-            get { return "202304131150213_MakeFinalMG"; }
+            get { return "202304131251144_MakeMG"; }
         }
         
         string IMigrationMetadata.Source
