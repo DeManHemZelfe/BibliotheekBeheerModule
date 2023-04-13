@@ -19,8 +19,10 @@ namespace BibliotheekBeheerModule.Model
     {
         [Key]
         public Guid Id { get; set; }
+        [Required]
         public string FirstName { get; set; }
         public string Infix { get; set; }
+        [Required]
         public string LastName { get; set; }
         public string FullName
         {

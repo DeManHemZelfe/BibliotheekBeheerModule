@@ -14,8 +14,10 @@ namespace BibliotheekBeheerModule.Model
     {
         [Key]
         public Guid Id { get; set; }
+        [Required]
         public string Name { get; set; }
         public string Type { get; set; }
+        [Required]
         public string Description { get; set; }
         
         [ForeignKey("Author")]

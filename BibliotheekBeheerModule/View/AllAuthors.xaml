@@ -42,11 +42,11 @@
         <Grid Grid.Row="1">
             <DataGrid Name="ItemList" ItemsSource="{Binding Authors}" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="LightGray">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Voornaam" Binding="{Binding FirstName}" MinWidth="250"/>
-                    <DataGridTextColumn Header="Tussenvoegsel" Binding="{Binding Infix}" MinWidth="250"/>
-                    <DataGridTextColumn Header="Acthernaam" Binding="{Binding LastName}" MinWidth="250"/>
-                    <DataGridTextColumn Header="Volledige naam" Binding="{Binding FullName}" MinWidth="250"/>
-                    <DataGridTemplateColumn Header="Update" MinWidth="250">
+                    <DataGridTextColumn Header="First name" Binding="{Binding FirstName}" MinWidth="150"/>
+                    <DataGridTextColumn Header="Infix" Binding="{Binding Infix}" MinWidth="50"/>
+                    <DataGridTextColumn Header="Last name" Binding="{Binding LastName}" MinWidth="150"/>
+                    <DataGridTextColumn Header="Full name" Binding="{Binding FullName}" MinWidth="250"/>
+                    <DataGridTemplateColumn Header="Update" MinWidth="50">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button 
@@ -57,7 +57,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Delete" MinWidth="250">
+                    <DataGridTemplateColumn Header="Delete" MinWidth="50">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button 

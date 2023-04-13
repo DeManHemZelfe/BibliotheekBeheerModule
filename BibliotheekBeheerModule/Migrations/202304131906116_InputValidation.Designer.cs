@@ -7,13 +7,13 @@ namespace BibliotheekBeheerModule.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class AuthorMigration : IMigrationMetadata
+    public sealed partial class InputValidation : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AuthorMigration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InputValidation));
         
         string IMigrationMetadata.Id
         {
-            get { return "202304131653056_AuthorMigration"; }
+            get { return "202304131906116_InputValidation"; }
         }
         
         string IMigrationMetadata.Source
