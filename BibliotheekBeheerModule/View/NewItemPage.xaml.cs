@@ -60,7 +60,7 @@ namespace BibliotheekBeheerModule.View
                     Id = Guid.NewGuid(),
                     Name = itemTitle.Text.ToString(),
                     Type = itemType.Text.ToString().Length < 1 ? "CD" : itemType.Text.ToString(),
-                    Description = itemTitle.Text.ToString(),
+                    Description = itemDescription.Text.ToString(),
                     Author = itemAuthor.Text.ToString(),
                 };
                 db.Items.Add(item);

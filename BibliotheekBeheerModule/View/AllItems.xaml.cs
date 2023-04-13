@@ -40,6 +40,26 @@ namespace BibliotheekBeheerModule.View
 
         public void SaveChanges() {}
 
+        private void SearchItem(object sender, RoutedEventArgs e)
+        {
+
+            string SearchTerm = itemSearch.Text;
+            if (!string.IsNullOrEmpty(SearchTerm))
+            {
+                var FilteredItems = Items.Where(item =>
+                item.Name.ToLower().Contains(SearchTerm.ToLower()) ||
+                item.Type.ToLower().Contains(SearchTerm.ToLower()) ||
+                item.Description.ToLower().Contains(SearchTerm.ToLower()) ||
+                item.Author.ToLower().Contains(SearchTerm.ToLower()));
+                ItemList.ItemsSource = FilteredItems;
+            } else
+            {
+               ItemList.ItemsSource = Items;
+            }
+
+           
+        } 
+
         private void UpdateRow(object sender, RoutedEventArgs e)
         {
             var button = (Button)sender;

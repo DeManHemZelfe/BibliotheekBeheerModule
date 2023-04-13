@@ -6,18 +6,19 @@
         xmlns:local="clr-namespace:BibliotheekBeheerModule.View"
         mc:Ignorable="d"
         Title="AllItems" WindowState="Maximized" WindowStyle="ToolWindow" Height="450" Width="800">
-    
-    
+
+
     <Grid Background="#F5F5F5">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="1*" MaxHeight="40px"/>
+            <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
 
         <Border Background="#0057e7" 
-            Height="60"
+
             Padding="10"
-            Margin="0 0 0 20">
+            Margin="0 0 0 0">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -42,7 +43,28 @@
         </Border>
 
         <Grid Grid.Row="1">
-            <DataGrid Name="ItemList" ItemsSource="{Binding Items}" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="LightGray">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="9*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="Search"
+                   Padding="10"
+                   Foreground="Black" 
+                   FontSize="14" 
+                   FontWeight="Bold" 
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Right"/>
+            <TextBox Name="itemSearch" TextChanged="SearchItem" Grid.Row="0" Grid.Column="1" Margin="0 4 20 4" VerticalContentAlignment="Center" MaxHeight="40px"/>
+        </Grid>
+
+
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="11*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid Name="ItemList" ItemsSource="{Binding Items}" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="LightGray" Grid.ColumnSpan="2">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Binding="{Binding Name}" MinWidth="100"/>
                     <DataGridTextColumn Header="Type" Binding="{Binding Type}" MinWidth="100"/>
