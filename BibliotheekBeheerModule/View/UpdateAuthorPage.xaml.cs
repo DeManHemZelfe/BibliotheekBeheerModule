@@ -20,56 +20,75 @@ using Type = BibliotheekBeheerModule.Model.Type;
 namespace BibliotheekBeheerModule.View
 {
     /// <summary>
-    /// Interaction logic for AddNewAuthor.xaml
+    /// Interaction logic for UpdateAuthorPage.xaml
     /// </summary>
-    public partial class AddNewAuthor : Window
+    public partial class UpdateAuthorPage : Window
     {
-        public AddNewAuthor()
+        public UpdateAuthorPage()
         {
             InitializeComponent();
             Init();
             DataContext = this;
         }
+
         public void Init()
         {
             TableDbContext tableDbContext = new TableDbContext();
             Items = new ObservableCollection<Item>(tableDbContext.Items);
             Authors = new ObservableCollection<Author>(tableDbContext.Authors);
-            Types = new ObservableCollection<Type>(tableDbContext.Types);
         }
-        private void AddAuthor(object sender, RoutedEventArgs e)
+
+        public void GetAuthorToUpdate(Guid AuthorId)
         {
             using (var db = new TableDbContext())
             {
-                var item = new Author
-                {
-                    Id = Guid.NewGuid(),
-                    FirstName = authorFirstname.Text.ToString(),
-                    Infix = authorInfix.Text.ToString(),
-                    LastName = authorLastname.Text.ToString(),
-                };
-                db.Authors.Add(item);
-                db.SaveChanges();
+                var authorToUpdate = db.Authors.Find(AuthorId);
+                authorFirstname.Text = authorToUpdate.FirstName;
+                authorInfix.Text = authorToUpdate.Infix;
+                authorLastname.Text = authorToUpdate.LastName;
+                AuthorUpdateButton.Tag = AuthorId;
             }
-            BackToMainMenu();
         }
-        private void PrevPage(object sender, RoutedEventArgs e)
+
+        private void UpdateAuthor(object sender, RoutedEventArgs e)
         {
-            MainWindow window = new MainWindow();
+            Button btn = sender as Button;
+            Guid AuthorId = new Guid(btn.Tag.ToString());
+
+            using (var db = new TableDbContext())
+            {
+                var authorToUpdate = db.Authors.Find(AuthorId);
+                var oldAuthor = authorToUpdate.FullName;
+                if (authorToUpdate != null)
+                {
+                    authorToUpdate.FirstName = authorFirstname.Text;
+                    authorToUpdate.Infix = authorInfix.Text;
+                    authorToUpdate.LastName = authorLastname.Text;
+                    db.SaveChanges();
+                    foreach (var item in Items) 
+                        if(item.Author == oldAuthor)
+                        {
+                            item.Author = authorToUpdate.FullName;
+                            db.SaveChanges();
+                        }
+                }
+            }
+            BackToAllAuthorsFunction();
+        }
+        private void BackToAllAuthors(object sender, RoutedEventArgs e)
+        {
+            AllAuthors window = new AllAuthors();
             window.Show();
             this.Close();
         }
-        private void BackToMainMenu()
+        private void BackToAllAuthorsFunction()
         {
-            MainWindow window = new MainWindow();
+            AllAuthors window = new AllAuthors();
             window.Show();
             this.Close();
         }
-
-
 
         private ObservableCollection<Type> _types;
-
         public ObservableCollection<Type> Types
         {
             get { return _types; }

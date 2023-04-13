@@ -41,9 +41,9 @@ namespace BibliotheekBeheerModule.View
             var row = FindVisualParent<DataGridRow>(button);
             var author = (Author)row.DataContext;
 
-            UpdateItemPage updateWindow = new UpdateItemPage();
+            UpdateAuthorPage updateWindow = new UpdateAuthorPage();
             updateWindow.Show();
-            updateWindow.GetItemToUpdate(author.Id);
+            updateWindow.GetAuthorToUpdate(author.Id);
             this.Close();
         }
 

@@ -66,13 +66,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DbContexts\TableDbContext.cs" />
-    <Compile Include="Migrations\202304120851175_ffff.cs" />
-    <Compile Include="Migrations\202304120851175_ffff.designer.cs">
-      <DependentUpon>202304120851175_ffff.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202304121102367_Create.cs" />
-    <Compile Include="Migrations\202304121102367_Create.designer.cs">
-      <DependentUpon>202304121102367_Create.cs</DependentUpon>
+    <Compile Include="Migrations\202304131150213_MakeFinalMG.cs" />
+    <Compile Include="Migrations\202304131150213_MakeFinalMG.designer.cs">
+      <DependentUpon>202304131150213_MakeFinalMG.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Author.cs" />
@@ -89,6 +85,9 @@
     </Compile>
     <Compile Include="View\NewItemPage.xaml.cs">
       <DependentUpon>NewItemPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UpdateAuthorPage.xaml.cs">
+      <DependentUpon>UpdateAuthorPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UpdateItemPage.xaml.cs">
       <DependentUpon>UpdateItemPage.xaml</DependentUpon>
@@ -121,6 +120,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UpdateAuthorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\UpdateItemPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -140,11 +143,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\202304120851175_ffff.resx">
-      <DependentUpon>202304120851175_ffff.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202304121102367_Create.resx">
-      <DependentUpon>202304121102367_Create.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202304131150213_MakeFinalMG.resx">
+      <DependentUpon>202304131150213_MakeFinalMG.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
