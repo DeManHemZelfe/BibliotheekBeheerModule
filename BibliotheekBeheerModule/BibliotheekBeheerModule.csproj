@@ -66,9 +66,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DbContexts\TableDbContext.cs" />
-    <Compile Include="Migrations\202304131251144_MakeMG.cs" />
-    <Compile Include="Migrations\202304131251144_MakeMG.designer.cs">
-      <DependentUpon>202304131251144_MakeMG.cs</DependentUpon>
+    <Compile Include="Migrations\202304131653056_AuthorMigration.cs" />
+    <Compile Include="Migrations\202304131653056_AuthorMigration.designer.cs">
+      <DependentUpon>202304131653056_AuthorMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Author.cs" />
@@ -143,8 +143,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\202304131251144_MakeMG.resx">
-      <DependentUpon>202304131251144_MakeMG.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202304131653056_AuthorMigration.resx">
+      <DependentUpon>202304131653056_AuthorMigration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

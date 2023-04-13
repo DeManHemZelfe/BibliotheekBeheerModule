@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BibliotheekBeheerModule.Model
 {
@@ -16,20 +17,11 @@ namespace BibliotheekBeheerModule.Model
         public string Name { get; set; }
         public string Type { get; set; }
         public string Description { get; set; }
+        
+        [ForeignKey("Author")]
+        public Guid AuthorId { get; set; }
+        public Author Author { get; set; }
 
-        private string _author;
-        public string Author
-        {
-            get => _author;
-            set
-            {
-                if (_author != value)
-                {
-                    _author = value;
-                    OnPropertyChanged(nameof(Author));
-                }
-            }
-        }
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)

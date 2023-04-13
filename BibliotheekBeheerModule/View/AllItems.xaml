@@ -82,7 +82,7 @@
                     <DataGridTextColumn Header="Name" Binding="{Binding Name}" MinWidth="100"/>
                     <DataGridTextColumn Header="Type" Binding="{Binding Type}" MinWidth="100"/>
                     <DataGridTextColumn Header="Description" Binding="{Binding Description}" MinWidth="300"/>
-                    <DataGridTextColumn Header="Author" Binding="{Binding Author}" MinWidth="100"/>
+                    <DataGridTextColumn Header="Author" Binding="{Binding Author.FullName}" MinWidth="100"/>
                     <DataGridTemplateColumn Header="Update">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

@@ -24,14 +24,9 @@ namespace BibliotheekBeheerModule.Model
         public string LastName { get; set; }
         public string FullName
         {
-            get { return $"{FirstName} {Infix} {LastName}"; } // retourneer de volledige naam als een string
+            get { return Infix.Length > 0 ? $"{FirstName} {Infix} {LastName}" : $"{FirstName} {LastName}"; } // retourneer de volledige naam als een string
         }
 
-        public ObservableCollection<Item> Items { get; set; }
-        public Author()
-        {
-            Items = new ObservableCollection<Item>();
-        }
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")

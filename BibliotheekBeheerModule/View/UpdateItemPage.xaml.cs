@@ -42,13 +42,15 @@ namespace BibliotheekBeheerModule.View
 
         public void GetItemToUpdate(Guid ItemId)
         {
+
             using (var db = new TableDbContext())
             {
                 var ItemToUpdate = db.Items.Find(ItemId);
+                var AuthorToUpdate = db.Authors.Find(ItemToUpdate.AuthorId);
                 ItemTitle.Text = ItemToUpdate.Name;
                 ItemType.Text = ItemToUpdate.Type;
                 ItemDescription.Text = ItemToUpdate.Description;
-                ItemAuthor.Text = ItemToUpdate.Author;
+                ItemAuthor.Text = AuthorToUpdate.FullName;
                 ItemUpdateButton.Tag = ItemId;
             }
         }
@@ -57,15 +59,18 @@ namespace BibliotheekBeheerModule.View
         {
             Button Btn = sender as Button;
             Guid ItemId = new Guid(Btn.Tag.ToString());
+
+            Author matchingAuthor = Authors.FirstOrDefault(a => a.FullName == ItemAuthor.Text.ToString());
+
             using (var db = new TableDbContext())
             {
                 var ItemToUpdate = db.Items.Find(ItemId);
                 if (ItemToUpdate != null)
                 {
-                    ItemToUpdate.Name = ItemTitle.Text;
-                    ItemToUpdate.Type = ItemType.Text;
-                    ItemToUpdate.Description = ItemDescription.Text;
-                    ItemToUpdate.Author = ItemAuthor.Text;
+                    ItemToUpdate.Name = ItemTitle.Text.Trim();
+                    ItemToUpdate.Type = ItemType.Text.Trim();
+                    ItemToUpdate.Description = ItemDescription.Text.Trim();
+                    ItemToUpdate.AuthorId = matchingAuthor.Id;
                     db.SaveChanges();
                 }
             }

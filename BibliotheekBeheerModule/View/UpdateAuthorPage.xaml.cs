@@ -58,19 +58,12 @@ namespace BibliotheekBeheerModule.View
             using (var db = new TableDbContext())
             {
                 var AuthorToUpdate = db.Authors.Find(AuthorId);
-                var oldAuthor = AuthorToUpdate.FullName;
                 if (AuthorToUpdate != null)
                 {
-                    AuthorToUpdate.FirstName = AuthorFirstname.Text;
-                    AuthorToUpdate.Infix = AuthorInfix.Text;
-                    AuthorToUpdate.LastName = AuthorLastname.Text;
+                    AuthorToUpdate.FirstName = AuthorFirstname.Text.Trim();
+                    AuthorToUpdate.Infix = AuthorInfix.Text.Trim();
+                    AuthorToUpdate.LastName = AuthorLastname.Text.Trim();
                     db.SaveChanges();
-                    foreach (var Item in Items) 
-                        if(Item.Author == oldAuthor)
-                        {
-                            Item.Author = AuthorToUpdate.FullName;
-                            db.SaveChanges();
-                        }
                 }
             }
             BackToAllAuthorsFunction();

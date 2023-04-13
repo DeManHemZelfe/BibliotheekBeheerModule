@@ -44,9 +44,9 @@ namespace BibliotheekBeheerModule.View
                 var author = new Author
                 {
                     Id = Guid.NewGuid(),
-                    FirstName = authorFirstname.Text.ToString(),
-                    Infix = authorInfix.Text.ToString(),
-                    LastName = authorLastname.Text.ToString(),
+                    FirstName = authorFirstname.Text.ToString().Trim(),
+                    Infix = authorInfix.Text.ToString().Trim(),
+                    LastName = authorLastname.Text.ToString().Trim(),
                 };
                 db.Authors.Add(author);
                 db.SaveChanges();

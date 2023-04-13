@@ -40,28 +40,21 @@ namespace BibliotheekBeheerModule.View
 
         private void AddNewItem(object sender, RoutedEventArgs e)
         {
+
+            Author matchingAuthor = Authors.FirstOrDefault(a => a.FullName == itemAuthor.Text.ToString());
+
             using (var db = new TableDbContext())
             {
-                foreach (var Author in Authors) 
+                var item = new Item
                 {
-                    if (Author.FullName == itemAuthor.Text)
-                    {
-                        var item = new Item
-                        {
-                            Id = Guid.NewGuid(),
-                            Name = itemTitle.Text.ToString(),
-                            Type = itemType.Text.ToString().Length < 1 ? "CD" : itemType.Text.ToString(),
-                            Description = itemDescription.Text.ToString(),
-                            Author = Author.FullName,
-                        };
-                        db.Items.Add(item);
-                        db.SaveChanges();
-                    }
-                    else 
-                    {
-                        // er is geen juiste author geset dus mag hij niet opslaan.
-                    }
-                }
+                    Id = Guid.NewGuid(),
+                    Name = itemTitle.Text.ToString().Trim(),
+                    Type = itemType.Text.ToString().Length < 1 ? "CD" : itemType.Text.ToString().Trim(),
+                    Description = itemDescription.Text.ToString().Trim(),
+                    AuthorId = matchingAuthor.Id,
+                };
+                db.Items.Add(item);
+                db.SaveChanges();
             }
             BackToMainMenu();
         }
