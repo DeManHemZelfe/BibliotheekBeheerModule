@@ -120,7 +120,7 @@ namespace BibliotheekBeheerModule.View
         }
         private void BackToAllAllItemsFunction()
         {
-            AllAuthors window = new AllAuthors();
+            AllItems window = new AllItems();
             window.Show();
             this.Close();
         }
