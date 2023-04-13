@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BibliotheekBeheerModule.View"
         mc:Ignorable="d"
-        Title="UpdateItem" WindowState="Minimized"  Height="450" Width="800">
+        Title="UpdateItem" WindowState="Maximized"  Height="450" Width="800">
     <Grid Background="#F5F5F5">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -37,9 +37,27 @@
             </Grid>
         </Border>
 
-        <Grid Grid.Row="1">
-            <StackPanel Grid.Row="1">
-                <Grid Margin="10">
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center">
+            <Border
+                BorderThickness="1 1 1 0" 
+                CornerRadius="5 5 0 0"
+                Padding="5" 
+                BorderBrush="#0057e7" 
+                Background="#0057e7">
+                <TextBlock 
+                        Text="Update Item"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Foreground="White"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"/>
+            </Border>
+            <Border
+                BorderBrush="Gray" 
+                BorderThickness="1 0 1 1"
+                CornerRadius="0 0 5 5"
+                Padding="10">
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -47,30 +65,80 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                    <TextBlock 
+                        Text="Title"
+                        Grid.Row="1"  
+                        Margin="0 10 0 5"
+                        VerticalAlignment="Center"/>
+                    <TextBox 
+                        Name="ItemTitle" 
+                        Grid.Row="2" 
+                        Width="500" 
+                        HorizontalAlignment="Left"/>
 
-                    <TextBlock Text="Titel:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
-                    <TextBox Name="ItemTitle" Grid.Row="0" Grid.Column="1" Margin="10" Text="{Binding Title}"/>
-
-                    <TextBlock Text="Type:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
-                    <ComboBox  Name="ItemType" Grid.Row="1" Grid.Column="1" Margin="10" ItemsSource="{Binding Types}" DisplayMemberPath="Name" IsEditable="True" TextSearch.TextPath="Name">
-                        
+                    <TextBlock 
+                        Text="Type" 
+                        Grid.Row="3"
+                        Margin="0 10 0 5"
+                        VerticalAlignment="Center"/>
+                    <ComboBox 
+                        Name="ItemType" 
+                        Grid.Row="4"  
+                        Width="500" 
+                        HorizontalAlignment="Left">
+                        <ComboBoxItem IsSelected="True">CD</ComboBoxItem>
+                        <ComboBoxItem>DVD</ComboBoxItem>
+                        <ComboBoxItem>Blue-Ray</ComboBoxItem>
                     </ComboBox>
 
-                    <TextBlock Text="Beschrijving:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
-                    <TextBox Name="ItemDescription" Grid.Row="2" Grid.Column="1" Margin="10"/>
+                    <TextBlock 
+                        Text="Beschrijving" 
+                        Grid.Row="5" 
+                        Margin="0 10 0 5"
+                        VerticalAlignment="Center"/>
+                    <TextBox 
+                        Name="ItemDescription" 
+                        Grid.Row="6"  
+                        Width="500" 
+                        HorizontalAlignment="Left"/>
 
-                    <TextBlock Text="Author:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
-                    <TextBox Name="ItemAuthor" Grid.Row="3" Grid.Column="1" Margin="10"/>
+                    <TextBlock 
+                        Text="Author" 
+                        Grid.Row="7"         
+                        Margin="0 10 0 5"
+                        VerticalAlignment="Center"/>
+                    <ComboBox 
+                        Name="ItemAuthor" 
+                        Grid.Row="8"
+                        Padding="5" 
+                        Width="500" 
+                        HorizontalAlignment="Left"
+                          ItemsSource="{Binding Authors}"
+                          DisplayMemberPath="FullName" 
+                          IsEditable="True" 
+                          TextSearch.TextPath="FullName">
+                    </ComboBox>
 
-                    <Button Name="ItemUpdateButton" Content="Update" Tag="ItemId" Click="UpdateItem" Background="#0057e7" Foreground="White" Grid.Row="4" Grid.Column="1" Margin="10"/>
+                    <Button
+                        Name="ItemUpdateButton" 
+                        Content="Update" 
+                        Background="#0057e7" 
+                        Foreground="White"  
+                        Margin="0 10 0 5" 
+                        Padding="0 5"
+                        Grid.Row="9"   
+                        Click="UpdateItem" 
+                        Width="100" 
+                        HorizontalAlignment="Center"/>
 
                 </Grid>
-            </StackPanel>
-        </Grid>
+            </Border>
+        </StackPanel>
     </Grid>
 </Window>

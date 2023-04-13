@@ -11,7 +11,7 @@
     <Grid Background="#F5F5F5">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="1*" MaxHeight="40px"/>
+            <RowDefinition Height="2*" MaxHeight="40px"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
 
@@ -38,33 +38,46 @@
                         Width="100"
                         Margin="1750,0,0,0"
                         Click="PrevPage"/>
-
             </Grid>
         </Border>
 
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="9*" />
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Search"
+        <Border Grid.Row="1" Margin="10 0 10 0" BorderBrush="Gray" BorderThickness="1 0 1 0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="9*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Search"
                    Padding="10"
                    Foreground="Black" 
                    FontSize="14" 
                    FontWeight="Bold" 
                    VerticalAlignment="Center"
                    HorizontalAlignment="Right"/>
-            <TextBox Name="itemSearch" TextChanged="SearchItem" Grid.Row="0" Grid.Column="1" Margin="0 4 20 4" VerticalContentAlignment="Center" MaxHeight="40px"/>
-        </Grid>
+                <TextBox
+                    Name="itemSearch" 
+                    TextChanged="SearchItem" 
+                    Grid.Row="0" 
+                    Grid.Column="1" 
+                    Margin="0 4 20 4" 
+                    VerticalContentAlignment="Center" 
+                    MaxHeight="40px"/>
+
+            </Grid>
+        </Border>
+
 
 
 
         <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="5*"/>
-                <ColumnDefinition Width="11*"/>
-            </Grid.ColumnDefinitions>
-            <DataGrid Name="ItemList" ItemsSource="{Binding Items}" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="LightGray" Grid.ColumnSpan="2">
+            <DataGrid
+                Name="ItemList" 
+                ItemsSource="{Binding Items}" 
+                AutoGenerateColumns="False" 
+                IsReadOnly="True"
+                Margin="10 0 10 20"
+                AlternatingRowBackground="LightGray">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Binding="{Binding Name}" MinWidth="100"/>
                     <DataGridTextColumn Header="Type" Binding="{Binding Type}" MinWidth="100"/>
