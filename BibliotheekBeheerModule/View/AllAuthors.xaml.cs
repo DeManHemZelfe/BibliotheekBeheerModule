@@ -15,65 +15,70 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Type = BibliotheekBeheerModule.Model.Type;
+using System.Windows.Navigation;
 
 namespace BibliotheekBeheerModule.View
 {
     /// <summary>
-    /// Interaction logic for NewItemPage.xaml
+    /// Interaction logic for AllAuthors.xaml
     /// </summary>
-    public partial class NewItemPage : Window
+    public partial class AllAuthors : Window
     {
-        public NewItemPage()
+        public AllAuthors()
         {
             InitializeComponent();
             Init();
             DataContext = this;
         }
-        public void Init()
+        private void Init()
         {
             TableDbContext tableDbContext = new TableDbContext();
-            Items = new ObservableCollection<Item>(tableDbContext.Items);
             Authors = new ObservableCollection<Author>(tableDbContext.Authors);
-            Types = new ObservableCollection<Type>(tableDbContext.Types);
         }
-
-        private void AddNewItem(object sender, RoutedEventArgs e)
+        private void UpdateRow(object sender, RoutedEventArgs e)
         {
-            using (var db = new TableDbContext())
-            {
-                var item = new Item
-                {
-                    Id = Guid.NewGuid(),
-                    Name = itemTitle.Text.ToString(),
-                    Type = itemType.Text.ToString().Length < 1 ? "CD" : itemType.Text.ToString(),
-                    Description = itemTitle.Text.ToString(),
-                    Author = itemAuthor.Text.ToString(),
-                };
-                db.Items.Add(item);
-                db.SaveChanges();
-            }
-        }
+            var button = (Button)sender;
+            var row = FindVisualParent<DataGridRow>(button);
+            var author = (Author)row.DataContext;
 
-        private void PrevPage(object sender, RoutedEventArgs e)
-        {
-            MainWindow window = new MainWindow();
-            window.Show();
+            UpdateItemPage updateWindow = new UpdateItemPage();
+            updateWindow.Show();
+            updateWindow.GetItemToUpdate(author.Id);
             this.Close();
         }
 
-
-        private ObservableCollection<Type> _types;
-
-        public ObservableCollection<Type> Types
+        private void DeleteRow(object sender, RoutedEventArgs e)
         {
-            get { return _types; }
-            set
+            var button = (Button)sender;
+            var row = FindVisualParent<DataGridRow>(button);
+            var author = (Author)row.DataContext;
+
+            using (var db = new TableDbContext())
             {
-                _types = value;
-                OnPropertyChanged(nameof(Types));
+                var authorToDelete = db.Authors.Find(author.Id);
+                if (authorToDelete != null)
+                {
+                    db.Authors.Attach(authorToDelete);
+                    db.Authors.Remove(authorToDelete);
+                    db.SaveChanges();
+                }
+                Console.WriteLine(author.FullName + " Removed");
+                Authors.Remove(author);
             }
+
         }
+        private DataGridRow FindVisualParent<DataGridRow>(DependencyObject obj) where DataGridRow : DependencyObject
+        {
+            DependencyObject parent = VisualTreeHelper.GetParent(obj);
+
+            while (parent != null && !(parent is DataGridRow))
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+            }
+
+            return parent as DataGridRow;
+        }
+
         private ObservableCollection<Item> _items;
 
         public ObservableCollection<Item> Items

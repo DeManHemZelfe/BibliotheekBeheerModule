@@ -38,7 +38,7 @@ namespace BibliotheekBeheerModule.View
             Authors = new ObservableCollection<Author>(tableDbContext.Authors);
         }
 
-        public void SaveChanges() {}
+        public void SaveChanges() { }
 
         private void UpdateRow(object sender, RoutedEventArgs e)
         {
@@ -85,6 +85,12 @@ namespace BibliotheekBeheerModule.View
             return parent as DataGridRow;
         }
 
+        private void PrevPage(object sender, RoutedEventArgs e)
+        {
+            MainWindow window = new MainWindow();
+            window.Show();
+            this.Close();
+        }
 
         private ObservableCollection<Item> _items;
 
@@ -114,13 +120,6 @@ namespace BibliotheekBeheerModule.View
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private void PrevPage(object sender, RoutedEventArgs e)
-        {
-            MainWindow window = new MainWindow();
-            window.Show();
-            this.Close();
         }
     }
 }

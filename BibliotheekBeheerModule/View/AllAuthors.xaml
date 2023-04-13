@@ -1,0 +1,75 @@
+﻿<Window x:Class="BibliotheekBeheerModule.View.AllAuthors"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BibliotheekBeheerModule.View"
+        mc:Ignorable="d"
+        Title="AllAuthors" WindowState="Maximized"  Height="450" Width="800">
+    <Grid Background="#F5F5F5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Background="#0057e7" 
+            Height="60"
+            Padding="10"
+            Margin="0 0 0 20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Dashboard"
+                   Foreground="White" 
+                   FontSize="24" 
+                   FontWeight="Bold" 
+                   VerticalAlignment="Center"/>
+                <Button Content="Terug" 
+                        Background="#4CAF50"
+                        Foreground="White"
+                        Grid.ColumnSpan="1"
+                        Width="100"
+                        Margin="1750,0,0,0"
+                        Click="PrevPage"/>
+
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <DataGrid Name="ItemList" ItemsSource="{Binding Authors}" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="LightGray">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Voornaam" Binding="{Binding Firstname}" MinWidth="250"/>
+                    <DataGridTextColumn Header="Tussenvoegsel" Binding="{Binding Infix}" MinWidth="250"/>
+                    <DataGridTextColumn Header="Acthernaam" Binding="{Binding Lastname}" MinWidth="250"/>
+                    <DataGridTextColumn Header="Volledige naam" Binding="{Binding Fullname}" MinWidth="250"/>
+                    <DataGridTemplateColumn Header="Update" MinWidth="250">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button 
+                                    Content="Update" 
+                                    Foreground="#ffffff" 
+                                    Background="#0057e7"
+                                    Click="UpdateRow"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Delete" MinWidth="250">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button 
+                                    Content="Delete" 
+                                    Foreground="#ffffff" 
+                                    Background="#d62d20"
+                                    Click="DeleteRow"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Window>
