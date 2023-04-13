@@ -11,10 +11,11 @@ using System.Collections.ObjectModel;
 using BibliotheekBeheerModule.Model;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
 
 namespace BibliotheekBeheerModule.Model
 {
-    public partial class Author
+    public partial class Author: INotifyPropertyChanged
     {
         [Key]
         public Guid Id { get; set; }
@@ -32,5 +33,10 @@ namespace BibliotheekBeheerModule.Model
             Items = new ObservableCollection<Item>();
         }
         public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
