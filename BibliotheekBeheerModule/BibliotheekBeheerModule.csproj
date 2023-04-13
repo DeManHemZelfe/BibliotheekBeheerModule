@@ -65,6 +65,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DbContexts\DbContextSeed.cs" />
     <Compile Include="DbContexts\TableDbContext.cs" />
     <Compile Include="Migrations\202304131653056_AuthorMigration.cs" />
     <Compile Include="Migrations\202304131653056_AuthorMigration.designer.cs">
