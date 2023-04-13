@@ -56,7 +56,7 @@
                    VerticalAlignment="Center"
                    HorizontalAlignment="Right"/>
                 <TextBox
-                    Name="itemSearch" 
+                    Name="ItemSearch" 
                     TextChanged="SearchItem" 
                     Grid.Row="0" 
                     Grid.Column="1" 

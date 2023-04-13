@@ -42,7 +42,7 @@ namespace BibliotheekBeheerModule
             this.Close();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ButtonClick(object sender, RoutedEventArgs e)
         {
 
         }

@@ -37,33 +37,33 @@ namespace BibliotheekBeheerModule.View
         }
         private void UpdateRow(object sender, RoutedEventArgs e)
         {
-            var button = (Button)sender;
-            var row = FindVisualParent<DataGridRow>(button);
-            var author = (Author)row.DataContext;
+            var Button = (Button)sender;
+            var Row = FindVisualParent<DataGridRow>(Button);
+            var Author = (Author)Row.DataContext;
 
             UpdateAuthorPage updateWindow = new UpdateAuthorPage();
             updateWindow.Show();
-            updateWindow.GetAuthorToUpdate(author.Id);
+            updateWindow.GetAuthorToUpdate(Author.Id);
             this.Close();
         }
 
         private void DeleteRow(object sender, RoutedEventArgs e)
         {
-            var button = (Button)sender;
-            var row = FindVisualParent<DataGridRow>(button);
-            var author = (Author)row.DataContext;
+            var Button = (Button)sender;
+            var Row = FindVisualParent<DataGridRow>(Button);
+            var Author = (Author)Row.DataContext;
 
             using (var db = new TableDbContext())
             {
-                var authorToDelete = db.Authors.Find(author.Id);
+                var authorToDelete = db.Authors.Find(Author.Id);
                 if (authorToDelete != null)
                 {
                     db.Authors.Attach(authorToDelete);
                     db.Authors.Remove(authorToDelete);
                     db.SaveChanges();
                 }
-                Console.WriteLine(author.FullName + " Removed");
-                Authors.Remove(author);
+                Console.WriteLine(Author.FullName + " Removed");
+                Authors.Remove(Author);
             }
         }
         private void PrevPage(object sender, RoutedEventArgs e)

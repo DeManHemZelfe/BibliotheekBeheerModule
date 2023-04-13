@@ -75,7 +75,7 @@
                         Margin="0 10 0 5"
                         VerticalAlignment="Center"/>
                         <TextBox 
-                        Name="authorFirstname" 
+                        Name="AuthorFirstname" 
                         Grid.Row="2" 
                         Width="500" 
                         HorizontalAlignment="Left"/>
@@ -86,7 +86,7 @@
                         Margin="0 10 0 5"
                         VerticalAlignment="Center"/>
                         <TextBox 
-                        Name="authorInfix" 
+                        Name="AuthorInfix" 
                         Grid.Row="4" 
                         Width="500" 
                         HorizontalAlignment="Left"/>
@@ -97,7 +97,7 @@
                         Margin="0 10 0 5"
                         VerticalAlignment="Center"/>
                         <TextBox 
-                        Name="authorLastname" 
+                        Name="AuthorLastname" 
                         Grid.Row="6"  
                         Width="500" 
                         HorizontalAlignment="Left"/>
