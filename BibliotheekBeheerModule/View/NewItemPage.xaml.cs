@@ -42,17 +42,28 @@ namespace BibliotheekBeheerModule.View
         {
             using (var db = new TableDbContext())
             {
-                var item = new Item
+                foreach (var author in Authors) 
                 {
-                    Id = Guid.NewGuid(),
-                    Name = itemTitle.Text.ToString(),
-                    Type = itemType.Text.ToString().Length < 1 ? "CD" : itemType.Text.ToString(),
-                    Description = itemDescription.Text.ToString(),
-                    Author = itemAuthor.Text.ToString(),
-                };
-                db.Items.Add(item);
-                db.SaveChanges();
+                    if (author.FullName == itemAuthor.Text)
+                    {
+                        var item = new Item
+                        {
+                            Id = Guid.NewGuid(),
+                            Name = itemTitle.Text.ToString(),
+                            Type = itemType.Text.ToString().Length < 1 ? "CD" : itemType.Text.ToString(),
+                            Description = itemDescription.Text.ToString(),
+                            Author = author.FullName,
+                        };
+                        db.Items.Add(item);
+                        db.SaveChanges();
+                    }
+                    else 
+                    {
+                        // er is geen juiste author geset dus mag hij niet opslaan.
+                    }
+                }
             }
+            BackToMainMenu();
         }
 
         private void PrevPage(object sender, RoutedEventArgs e)
@@ -62,6 +73,12 @@ namespace BibliotheekBeheerModule.View
             this.Close();
         }
 
+        private void BackToMainMenu()
+        {
+            MainWindow window = new MainWindow();
+            window.Show();
+            this.Close();
+        }
 
         private ObservableCollection<Type> _types;
 

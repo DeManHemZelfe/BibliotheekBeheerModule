@@ -57,7 +57,6 @@ namespace BibliotheekBeheerModule.View
         {
             Button btn = sender as Button;
             Guid ItemId = new Guid(btn.Tag.ToString());
-
             using (var db = new TableDbContext())
             {
                 var itemToUpdate = db.Items.Find(ItemId);
@@ -70,6 +69,7 @@ namespace BibliotheekBeheerModule.View
                     db.SaveChanges();
                 }
             }
+            BackToAllAllItemsFunction();
         }
 
         private ObservableCollection<Type> _types;
@@ -118,6 +118,13 @@ namespace BibliotheekBeheerModule.View
             window.Show();
             this.Close();
         }
+        private void BackToAllAllItemsFunction()
+        {
+            AllAuthors window = new AllAuthors();
+            window.Show();
+            this.Close();
+        }
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

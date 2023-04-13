@@ -50,7 +50,7 @@ namespace BibliotheekBeheerModule.View
                 item.Name.ToLower().Contains(SearchTerm.ToLower()) ||
                 item.Type.ToLower().Contains(SearchTerm.ToLower()) ||
                 item.Description.ToLower().Contains(SearchTerm.ToLower()) ||
-                item.Author.ToLower().Contains(SearchTerm.ToLower()));
+                item.Author.Contains(SearchTerm.ToLower()));
                 ItemList.ItemsSource = FilteredItems;
             } else
             {

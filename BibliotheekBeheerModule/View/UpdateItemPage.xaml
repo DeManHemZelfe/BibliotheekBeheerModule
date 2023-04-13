@@ -65,7 +65,12 @@
                     <TextBox Name="ItemDescription" Grid.Row="2" Grid.Column="1" Margin="10"/>
 
                     <TextBlock Text="Author:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
-                    <TextBox Name="ItemAuthor" Grid.Row="3" Grid.Column="1" Margin="10"/>
+                    <ComboBox Name="ItemAuthor" Grid.Row="3" Grid.Column="1" Margin="10" Padding="5" Width="500" HorizontalAlignment="Left"
+                          ItemsSource="{Binding Authors}"
+                          DisplayMemberPath="FullName" 
+                          IsEditable="True" 
+                          TextSearch.TextPath="FullName">
+                    </ComboBox>
 
                     <Button Name="ItemUpdateButton" Content="Update" Tag="ItemId" Click="UpdateItem" Background="#0057e7" Foreground="White" Grid.Row="4" Grid.Column="1" Margin="10"/>
 

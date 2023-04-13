@@ -34,6 +34,7 @@ namespace BibliotheekBeheerModule.View
         public void Init()
         {
             TableDbContext tableDbContext = new TableDbContext();
+            Items = new ObservableCollection<Item>(tableDbContext.Items);
             Authors = new ObservableCollection<Author>(tableDbContext.Authors);
         }
 
@@ -57,12 +58,19 @@ namespace BibliotheekBeheerModule.View
             using (var db = new TableDbContext())
             {
                 var authorToUpdate = db.Authors.Find(AuthorId);
+                var oldAuthor = authorToUpdate.FullName;
                 if (authorToUpdate != null)
                 {
                     authorToUpdate.FirstName = authorFirstname.Text;
                     authorToUpdate.Infix = authorInfix.Text;
                     authorToUpdate.LastName = authorLastname.Text;
                     db.SaveChanges();
+                    foreach (var item in Items) 
+                        if(item.Author == oldAuthor)
+                        {
+                            item.Author = authorToUpdate.FullName;
+                            db.SaveChanges();
+                        }
                 }
             }
             BackToAllAuthorsFunction();

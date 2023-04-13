@@ -51,6 +51,7 @@ namespace BibliotheekBeheerModule.View
                 db.Authors.Add(item);
                 db.SaveChanges();
             }
+            BackToMainMenu();
         }
         private void PrevPage(object sender, RoutedEventArgs e)
         {
@@ -58,6 +59,13 @@ namespace BibliotheekBeheerModule.View
             window.Show();
             this.Close();
         }
+        private void BackToMainMenu()
+        {
+            MainWindow window = new MainWindow();
+            window.Show();
+            this.Close();
+        }
+
 
 
         private ObservableCollection<Type> _types;
