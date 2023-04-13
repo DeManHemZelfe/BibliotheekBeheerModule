@@ -15,75 +15,81 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Windows.Navigation;
+using Type = BibliotheekBeheerModule.Model.Type;
 
 namespace BibliotheekBeheerModule.View
 {
     /// <summary>
-    /// Interaction logic for AllAuthors.xaml
+    /// Interaction logic for UpdateAuthorPage.xaml
     /// </summary>
-    public partial class AllAuthors : Window
+    public partial class UpdateAuthorPage : Window
     {
-        public AllAuthors()
+        public UpdateAuthorPage()
         {
             InitializeComponent();
             Init();
             DataContext = this;
         }
-        private void Init()
+
+        public void Init()
         {
             TableDbContext tableDbContext = new TableDbContext();
             Authors = new ObservableCollection<Author>(tableDbContext.Authors);
         }
-        private void UpdateRow(object sender, RoutedEventArgs e)
-        {
-            var button = (Button)sender;
-            var row = FindVisualParent<DataGridRow>(button);
-            var author = (Author)row.DataContext;
 
-            UpdateAuthorPage updateWindow = new UpdateAuthorPage();
-            updateWindow.Show();
-            updateWindow.GetAuthorToUpdate(author.Id);
-            this.Close();
+        public void GetAuthorToUpdate(Guid AuthorId)
+        {
+            using (var db = new TableDbContext())
+            {
+                var authorToUpdate = db.Authors.Find(AuthorId);
+                authorFirstname.Text = authorToUpdate.FirstName;
+                authorInfix.Text = authorToUpdate.Infix;
+                authorLastname.Text = authorToUpdate.LastName;
+                AuthorUpdateButton.Tag = AuthorId;
+            }
         }
 
-        private void DeleteRow(object sender, RoutedEventArgs e)
+        private void UpdateAuthor(object sender, RoutedEventArgs e)
         {
-            var button = (Button)sender;
-            var row = FindVisualParent<DataGridRow>(button);
-            var author = (Author)row.DataContext;
+            Button btn = sender as Button;
+            Guid AuthorId = new Guid(btn.Tag.ToString());
 
             using (var db = new TableDbContext())
             {
-                var authorToDelete = db.Authors.Find(author.Id);
-                if (authorToDelete != null)
+                var authorToUpdate = db.Authors.Find(AuthorId);
+                if (authorToUpdate != null)
                 {
-                    db.Authors.Attach(authorToDelete);
-                    db.Authors.Remove(authorToDelete);
+                    authorToUpdate.FirstName = authorFirstname.Text;
+                    authorToUpdate.Infix = authorInfix.Text;
+                    authorToUpdate.LastName = authorLastname.Text;
                     db.SaveChanges();
                 }
-                Console.WriteLine(author.FullName + " Removed");
-                Authors.Remove(author);
             }
+            BackToAllAuthorsFunction();
         }
-        private void PrevPage(object sender, RoutedEventArgs e)
+        private void BackToAllAuthors(object sender, RoutedEventArgs e)
         {
-            MainWindow window = new MainWindow();
+            AllAuthors window = new AllAuthors();
             window.Show();
             this.Close();
         }
-        private DataGridRow FindVisualParent<DataGridRow>(DependencyObject obj) where DataGridRow : DependencyObject
+        private void BackToAllAuthorsFunction()
         {
-            DependencyObject parent = VisualTreeHelper.GetParent(obj);
-
-            while (parent != null && !(parent is DataGridRow))
-            {
-                parent = VisualTreeHelper.GetParent(parent);
-            }
-
-            return parent as DataGridRow;
+            AllAuthors window = new AllAuthors();
+            window.Show();
+            this.Close();
         }
 
+        private ObservableCollection<Type> _types;
+        public ObservableCollection<Type> Types
+        {
+            get { return _types; }
+            set
+            {
+                _types = value;
+                OnPropertyChanged(nameof(Types));
+            }
+        }
         private ObservableCollection<Item> _items;
 
         public ObservableCollection<Item> Items

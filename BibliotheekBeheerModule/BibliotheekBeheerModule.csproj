@@ -90,6 +90,9 @@
     <Compile Include="View\NewItemPage.xaml.cs">
       <DependentUpon>NewItemPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UpdateAuthorPage.xaml.cs">
+      <DependentUpon>UpdateAuthorPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UpdateItemPage.xaml.cs">
       <DependentUpon>UpdateItemPage.xaml</DependentUpon>
     </Compile>
@@ -118,6 +121,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\NewItemPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UpdateAuthorPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
