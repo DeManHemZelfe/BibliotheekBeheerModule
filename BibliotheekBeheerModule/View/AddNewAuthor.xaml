@@ -1,11 +1,11 @@
-﻿<Window x:Class="BibliotheekBeheerModule.View.NewItemPage"
+﻿<Window x:Class="BibliotheekBeheerModule.View.AddNewAuthor"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BibliotheekBeheerModule.View"
         mc:Ignorable="d"
-        Title="NewItemPage" WindowState="Maximized" Height="450" Width="800">
+        Title="AddNewAuthor" WindowState="Maximized" Height="450" Width="800">
     <Grid Background="#F5F5F5">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -32,7 +32,6 @@
 
             </Grid>
         </Border>
-
         <StackPanel Grid.Row="1">
             <Grid Margin="10">
                 <Grid.RowDefinitions>
@@ -48,32 +47,18 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Text="Titel:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
-                <TextBox Name="itemTitle" Grid.Row="0" Grid.Column="1" Margin="10" Width="500" HorizontalAlignment="Left"/>
+                <TextBlock Text="Firstname:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox Name="authorFirstname" Grid.Row="0" Grid.Column="1" Margin="10"/>
 
-                <TextBlock Text="Type:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
-                <ComboBox Name="itemType" Grid.Row="1" Grid.Column="1" Margin="10" Width="500" HorizontalAlignment="Left">
-                    <ComboBoxItem IsSelected="True">CD</ComboBoxItem>
-                    <ComboBoxItem>DVD</ComboBoxItem>
-                    <ComboBoxItem>Blue-Ray</ComboBoxItem>
-                </ComboBox>
+                <TextBlock Text="Infix" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox Name="authorInfix" Grid.Row="1" Grid.Column="1" Margin="10"/>
 
-                <TextBlock Text="Beschrijving:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
-                <TextBox Name="itemDescription" Grid.Row="2" Grid.Column="1" Margin="10" Width="500" HorizontalAlignment="Left"/>
+                <TextBlock Text="Lastname:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox Name="authorLastname" Grid.Row="2" Grid.Column="1" Margin="10"/>
 
-                <TextBlock Text="Author:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
-                <ComboBox Name="itemAuthor" Grid.Row="3" Grid.Column="1" Margin="10" Padding="5" Width="500" HorizontalAlignment="Left"
-                          ItemsSource="{Binding Authors}"
-                          DisplayMemberPath="FullName" 
-                          IsEditable="True" 
-                          TextSearch.TextPath="FullName">              
-                </ComboBox>
-
-                <Button Content="Toevoegen" Background="#008744" Foreground="White" Grid.Row="4" Grid.Column="1" Margin="10" Click="AddNewItem" Width="500" HorizontalAlignment="Left"/>
+                <Button Content="Toevoegen" Background="#008744" Foreground="White" Grid.Row="4" Grid.Column="1" Margin="10" Click="AddAuthor"/>
 
             </Grid>
         </StackPanel>
-
     </Grid>
-
 </Window>

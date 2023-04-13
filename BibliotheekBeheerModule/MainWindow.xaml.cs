@@ -35,6 +35,12 @@ namespace BibliotheekBeheerModule
             window.Show();
             this.Close();
         }
+        private void ShowAllAuthorsWindow(object sender, RoutedEventArgs e)
+        {
+            AllAuthors window = new AllAuthors();
+            window.Show();
+            this.Close();
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -43,6 +49,12 @@ namespace BibliotheekBeheerModule
         private void AddNewItemsPage(object sender, RoutedEventArgs e)
         {
             NewItemPage window = new NewItemPage();
+            window.Show();
+            this.Close();
+        }
+        private void AddNewAuthorPage(object sender, RoutedEventArgs e)
+        {
+            AddNewAuthor window = new AddNewAuthor();
             window.Show();
             this.Close();
         }

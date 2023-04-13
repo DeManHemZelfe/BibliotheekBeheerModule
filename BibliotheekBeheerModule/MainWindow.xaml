@@ -94,8 +94,8 @@
                 Margin="20" 
                 BorderThickness="0" 
                 Padding="20">
-                <Button Click="Button_Click" 
-                    Content="Bekijk statistieken" 
+                <Button Click="ShowAllAuthorsWindow" 
+                    Content="Bekijk authors" 
                     FontSize="14" 
                     Foreground="White" 
                     FontWeight="Bold" 
@@ -128,6 +128,21 @@
                 Padding="20">
                 <Button Click="Button_Click" 
                     Content="Exporteer gegevens" 
+                    FontSize="14" 
+                    Foreground="White" 
+                    FontWeight="Bold" 
+                    Background="Transparent" 
+                    BorderThickness="0"></Button>
+            </Border>
+            
+            <Border Grid.Row="1" Grid.Column="1" 
+                Background="#9C27B0" 
+                CornerRadius="10" 
+                Margin="20" 
+                BorderThickness="0" 
+                Padding="20">
+                <Button Click="AddNewAuthorPage" 
+                    Content="Voeg nieuwe author" 
                     FontSize="14" 
                     Foreground="White" 
                     FontWeight="Bold" 

@@ -20,11 +20,11 @@ using Type = BibliotheekBeheerModule.Model.Type;
 namespace BibliotheekBeheerModule.View
 {
     /// <summary>
-    /// Interaction logic for NewItemPage.xaml
+    /// Interaction logic for AddNewAuthor.xaml
     /// </summary>
-    public partial class NewItemPage : Window
+    public partial class AddNewAuthor : Window
     {
-        public NewItemPage()
+        public AddNewAuthor()
         {
             InitializeComponent();
             Init();
@@ -37,24 +37,21 @@ namespace BibliotheekBeheerModule.View
             Authors = new ObservableCollection<Author>(tableDbContext.Authors);
             Types = new ObservableCollection<Type>(tableDbContext.Types);
         }
-
-        private void AddNewItem(object sender, RoutedEventArgs e)
+        private void AddAuthor(object sender, RoutedEventArgs e)
         {
             using (var db = new TableDbContext())
             {
-                var item = new Item
+                var item = new Author
                 {
                     Id = Guid.NewGuid(),
-                    Name = itemTitle.Text.ToString(),
-                    Type = itemType.Text.ToString().Length < 1 ? "CD" : itemType.Text.ToString(),
-                    Description = itemDescription.Text.ToString(),
-                    Author = itemAuthor.Text.ToString(),
+                    FirstName = authorFirstname.Text.ToString(),
+                    Infix = authorInfix.Text.ToString(),
+                    LastName = authorLastname.Text.ToString(),
                 };
-                db.Items.Add(item);
+                db.Authors.Add(item);
                 db.SaveChanges();
             }
         }
-
         private void PrevPage(object sender, RoutedEventArgs e)
         {
             MainWindow window = new MainWindow();

@@ -1,5 +1,9 @@
-﻿using System;
+﻿using BibliotheekBeheerModule.DbContexts;
+using BibliotheekBeheerModule.Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,64 +15,35 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Collections.ObjectModel;
-using BibliotheekBeheerModule.Model;
-using BibliotheekBeheerModule.DbContexts;
-using System.ComponentModel;
 using System.Windows.Navigation;
 
 namespace BibliotheekBeheerModule.View
 {
     /// <summary>
-    /// Interaction logic for AllItems.xaml
+    /// Interaction logic for AllAuthors.xaml
     /// </summary>
-    public partial class AllItems : Window
+    public partial class AllAuthors : Window
     {
-        public AllItems()
+        public AllAuthors()
         {
             InitializeComponent();
             Init();
             DataContext = this;
         }
-
         private void Init()
         {
             TableDbContext tableDbContext = new TableDbContext();
-            Items = new ObservableCollection<Item>(tableDbContext.Items);
             Authors = new ObservableCollection<Author>(tableDbContext.Authors);
         }
-
-        public void SaveChanges() { }
-
-        private void SearchItem(object sender, RoutedEventArgs e)
-        {
-
-            string SearchTerm = itemSearch.Text;
-            if (!string.IsNullOrEmpty(SearchTerm))
-            {
-                var FilteredItems = Items.Where(item =>
-                item.Name.ToLower().Contains(SearchTerm.ToLower()) ||
-                item.Type.ToLower().Contains(SearchTerm.ToLower()) ||
-                item.Description.ToLower().Contains(SearchTerm.ToLower()) ||
-                item.Author.ToLower().Contains(SearchTerm.ToLower()));
-                ItemList.ItemsSource = FilteredItems;
-            } else
-            {
-               ItemList.ItemsSource = Items;
-            }
-
-           
-        } 
-
         private void UpdateRow(object sender, RoutedEventArgs e)
         {
             var button = (Button)sender;
             var row = FindVisualParent<DataGridRow>(button);
-            var item = (Item)row.DataContext;
+            var author = (Author)row.DataContext;
 
             UpdateItemPage updateWindow = new UpdateItemPage();
             updateWindow.Show();
-            updateWindow.GetItemToUpdate(item.Id);
+            updateWindow.GetItemToUpdate(author.Id);
             this.Close();
         }
 
@@ -76,23 +51,27 @@ namespace BibliotheekBeheerModule.View
         {
             var button = (Button)sender;
             var row = FindVisualParent<DataGridRow>(button);
-            var item = (Item)row.DataContext;
+            var author = (Author)row.DataContext;
 
             using (var db = new TableDbContext())
             {
-                var itemToDelete = db.Items.Find(item.Id);
-                if (itemToDelete != null)
+                var authorToDelete = db.Authors.Find(author.Id);
+                if (authorToDelete != null)
                 {
-                    db.Items.Attach(itemToDelete);
-                    db.Items.Remove(itemToDelete);
+                    db.Authors.Attach(authorToDelete);
+                    db.Authors.Remove(authorToDelete);
                     db.SaveChanges();
                 }
-                Console.WriteLine(item.Name + " Removed");
-                Items.Remove(item);
+                Console.WriteLine(author.FullName + " Removed");
+                Authors.Remove(author);
             }
-
         }
-
+        private void PrevPage(object sender, RoutedEventArgs e)
+        {
+            MainWindow window = new MainWindow();
+            window.Show();
+            this.Close();
+        }
         private DataGridRow FindVisualParent<DataGridRow>(DependencyObject obj) where DataGridRow : DependencyObject
         {
             DependencyObject parent = VisualTreeHelper.GetParent(obj);
@@ -103,13 +82,6 @@ namespace BibliotheekBeheerModule.View
             }
 
             return parent as DataGridRow;
-        }
-
-        private void PrevPage(object sender, RoutedEventArgs e)
-        {
-            MainWindow window = new MainWindow();
-            window.Show();
-            this.Close();
         }
 
         private ObservableCollection<Item> _items;
