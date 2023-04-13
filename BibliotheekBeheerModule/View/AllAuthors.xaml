@@ -42,10 +42,10 @@
         <Grid Grid.Row="1">
             <DataGrid Name="ItemList" ItemsSource="{Binding Authors}" AutoGenerateColumns="False" IsReadOnly="True" AlternatingRowBackground="LightGray">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Voornaam" Binding="{Binding Firstname}" MinWidth="250"/>
+                    <DataGridTextColumn Header="Voornaam" Binding="{Binding FirstName}" MinWidth="250"/>
                     <DataGridTextColumn Header="Tussenvoegsel" Binding="{Binding Infix}" MinWidth="250"/>
-                    <DataGridTextColumn Header="Acthernaam" Binding="{Binding Lastname}" MinWidth="250"/>
-                    <DataGridTextColumn Header="Volledige naam" Binding="{Binding Fullname}" MinWidth="250"/>
+                    <DataGridTextColumn Header="Acthernaam" Binding="{Binding LastName}" MinWidth="250"/>
+                    <DataGridTextColumn Header="Volledige naam" Binding="{Binding FullName}" MinWidth="250"/>
                     <DataGridTemplateColumn Header="Update" MinWidth="250">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
