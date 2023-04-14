@@ -1,9 +1,10 @@
 ﻿<Window x:Class="BibliotheekBeheerModule.View.UpdateItemPage"
+        Loaded="WindowLoaded"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:BibliotheekBeheerModule.View"
+        xmlns:local="clr-namespace:BibliotheekBeheerModule.View" xmlns:validationrules="clr-namespace:BibliotheekBeheerModule.ValidationRules"
         mc:Ignorable="d"
         Title="UpdateItem" WindowState="Maximized"  Height="450" Width="800">
     <Grid Background="#F5F5F5">
@@ -77,10 +78,18 @@
                         Margin="0 10 0 5"
                         VerticalAlignment="Center"/>
                     <TextBox 
-                        Name="ItemTitle" 
+                        x:Name="ItemTitle" 
                         Grid.Row="2" 
                         Width="500" 
-                        HorizontalAlignment="Left"/>
+                        HorizontalAlignment="Left">
+                        <TextBox.Text>
+                            <Binding Path="ItemTitleInput" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <validationrules:InputLenghtValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
 
                     <TextBlock 
                         Text="Type" 
@@ -103,10 +112,18 @@
                         Margin="0 10 0 5"
                         VerticalAlignment="Center"/>
                     <TextBox 
-                        Name="ItemDescription" 
+                        x:Name="ItemDescription" 
                         Grid.Row="6"  
                         Width="500" 
-                        HorizontalAlignment="Left"/>
+                        HorizontalAlignment="Left">
+                        <TextBox.Text>
+                            <Binding Path="ItemDescriptionInput" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <validationrules:InputLenghtValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
 
                     <TextBlock 
                         Text="Author" 
@@ -135,8 +152,20 @@
                         Grid.Row="9"   
                         Click="UpdateItem" 
                         Width="100" 
-                        HorizontalAlignment="Center"/>
-
+                        HorizontalAlignment="Center">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=ItemTitle, Path=(Validation.HasError)}" Value="True">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ElementName=ItemDescription, Path=(Validation.HasError)}" Value="True">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
                 </Grid>
             </Border>
         </StackPanel>

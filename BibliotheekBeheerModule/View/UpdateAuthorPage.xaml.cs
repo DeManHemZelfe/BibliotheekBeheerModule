@@ -39,6 +39,39 @@ namespace BibliotheekBeheerModule.View
             Authors = new ObservableCollection<Author>(tableDbContext.Authors);
         }
 
+        private void WindowLoaded(object sender, RoutedEventArgs e)
+        {
+            // Trigger the validation of the text boxes
+            var bindingExpression = AuthorFirstname.GetBindingExpression(TextBox.TextProperty);
+            bindingExpression?.UpdateSource();
+
+            bindingExpression = AuthorLastname.GetBindingExpression(TextBox.TextProperty);
+            bindingExpression?.UpdateSource();
+        }
+
+
+        private string _authorFirstNameInput;
+        public string AuthorFirstNameInput
+        {
+            get { return _authorFirstNameInput; }
+            set
+            {
+                _authorFirstNameInput = value;
+                OnPropertyChanged(nameof(Types));
+            }
+        }
+
+        private string _authorLastNameInput;
+        public string AuthorLastNameInput
+        {
+            get { return _authorLastNameInput; }
+            set
+            {
+                _authorLastNameInput = value;
+                OnPropertyChanged(nameof(Types));
+            }
+        }
+
         // This gets the author that the user wants to update and places the data inside the fields 
         public void GetAuthorToUpdate(Guid AuthorId)
         {

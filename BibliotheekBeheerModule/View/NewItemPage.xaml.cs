@@ -40,6 +40,38 @@ namespace BibliotheekBeheerModule.View
             Types = new ObservableCollection<Type>(tableDbContext.Types);
         }
 
+        private void WindowLoaded(object sender, RoutedEventArgs e)
+        {
+            // Trigger the validation of the text boxes
+            var bindingExpression = itemTitle.GetBindingExpression(TextBox.TextProperty);
+            bindingExpression?.UpdateSource();
+
+            bindingExpression = itemDescription.GetBindingExpression(TextBox.TextProperty);
+            bindingExpression?.UpdateSource();
+        }
+
+        private string _itemTitleInput;
+        public string ItemTitleInput
+        {
+            get { return _itemTitleInput; }
+            set
+            {
+                _itemTitleInput = value;
+                OnPropertyChanged(nameof(Types));
+            }
+        }
+
+        private string _itemDescriptionInput;
+        public string ItemDescriptionInput
+        {
+            get { return _itemDescriptionInput; }
+            set
+            {
+                _itemDescriptionInput = value;
+                OnPropertyChanged(nameof(Types));
+            }
+        }
+
         private void AddNewItem(object sender, RoutedEventArgs e)
         {
             // Get Author id byt matching the full name.
