@@ -75,6 +75,7 @@
     <Compile Include="Model\Author.cs" />
     <Compile Include="Model\Item.cs" />
     <Compile Include="Model\Type.cs" />
+    <Compile Include="ValidationRules\InputLenghtValidationRule.cs" />
     <Compile Include="View\AddNewAuthor.xaml.cs">
       <DependentUpon>AddNewAuthor.xaml</DependentUpon>
     </Compile>
