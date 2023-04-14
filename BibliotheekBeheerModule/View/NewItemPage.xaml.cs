@@ -75,6 +75,12 @@ namespace BibliotheekBeheerModule.View
             this.Close();
         }
 
+        // Define an ObservableCollection with the name of the generic type.
+        // Define a public property with the same type name.
+        // Getter of the property that returns _.
+        // Setter of the property that assigns the value of 'value' to _.
+        // And then calls OnPropertyChanged with the name of the property.
+
         private ObservableCollection<Type> _types;
 
         public ObservableCollection<Type> Types

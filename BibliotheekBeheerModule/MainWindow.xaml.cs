@@ -41,11 +41,6 @@ namespace BibliotheekBeheerModule
             window.Show();
             this.Close();
         }
-
-        private void ButtonClick(object sender, RoutedEventArgs e)
-        {
-
-        }
         private void AddNewItemsPage(object sender, RoutedEventArgs e)
         {
             NewItemPage window = new NewItemPage();
@@ -58,7 +53,6 @@ namespace BibliotheekBeheerModule
             window.Show();
             this.Close();
         }
-
         private void ExitProgram(object sender, RoutedEventArgs e)
         {
             this.Close();
