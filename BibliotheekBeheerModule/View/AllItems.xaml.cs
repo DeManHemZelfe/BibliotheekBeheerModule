@@ -31,6 +31,7 @@ namespace BibliotheekBeheerModule.View
             DataContext = this;
         }
 
+        // Import all items and authors
         private void Init()
         {
             TableDbContext tableDbContext = new TableDbContext();
@@ -38,8 +39,7 @@ namespace BibliotheekBeheerModule.View
             Authors = new ObservableCollection<Author>(tableDbContext.Authors);
         }
 
-        public void SaveChanges() { }
-
+        // Function for the searchbar that filters items based in text input
         private void SearchItem(object sender, RoutedEventArgs e)
         {
 
@@ -54,6 +54,7 @@ namespace BibliotheekBeheerModule.View
                 ItemList.ItemsSource = FilteredItems;
             } else
             {
+               // When the filter is empty show all items
                ItemList.ItemsSource = Items;
             }
 
@@ -62,10 +63,12 @@ namespace BibliotheekBeheerModule.View
 
         private void UpdateRow(object sender, RoutedEventArgs e)
         {
+            // Get row to update 
             var Button = (Button)sender;
             var Row = FindVisualParent<DataGridRow>(Button);
             var Item = (Item)Row.DataContext;
 
+            // Open update window
             UpdateItemPage updateWindow = new UpdateItemPage();
             updateWindow.Show();
             updateWindow.GetItemToUpdate(Item.Id);
@@ -74,10 +77,12 @@ namespace BibliotheekBeheerModule.View
 
         private void DeleteRow(object sender, RoutedEventArgs e)
         {
+            // Get row to delete
             var Button = (Button)sender;
             var Row = FindVisualParent<DataGridRow>(Button);
             var Item = (Item)Row.DataContext;
 
+            // Delete row 
             using (var db = new TableDbContext())
             {
                 var itemToDelete = db.Items.Find(Item.Id);
@@ -87,12 +92,21 @@ namespace BibliotheekBeheerModule.View
                     db.Items.Remove(itemToDelete);
                     db.SaveChanges();
                 }
-                Console.WriteLine(Item.Name + " Removed");
                 Items.Remove(Item);
             }
 
         }
 
+        // Navigate to previous page
+        private void PrevPage(object sender, RoutedEventArgs e)
+        {
+            MainWindow window = new MainWindow();
+            window.Show();
+            this.Close();
+        }
+
+
+        // Function that returns the parent row as a datagridrow
         private DataGridRow FindVisualParent<DataGridRow>(DependencyObject obj) where DataGridRow : DependencyObject
         {
             DependencyObject parent = VisualTreeHelper.GetParent(obj);
@@ -103,13 +117,6 @@ namespace BibliotheekBeheerModule.View
             }
 
             return parent as DataGridRow;
-        }
-
-        private void PrevPage(object sender, RoutedEventArgs e)
-        {
-            MainWindow window = new MainWindow();
-            window.Show();
-            this.Close();
         }
 
         private ObservableCollection<Item> _items;

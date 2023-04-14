@@ -31,6 +31,7 @@ namespace BibliotheekBeheerModule.View
             DataContext = this;
         }
 
+        // Import data from database
         public void Init()
         {
             TableDbContext tableDbContext = new TableDbContext();
@@ -38,6 +39,7 @@ namespace BibliotheekBeheerModule.View
             Authors = new ObservableCollection<Author>(tableDbContext.Authors);
         }
 
+        // This gets the author that the user wants to update and places the data inside the fields 
         public void GetAuthorToUpdate(Guid AuthorId)
         {
             using (var db = new TableDbContext())
@@ -46,12 +48,14 @@ namespace BibliotheekBeheerModule.View
                 AuthorFirstname.Text = AuthorToUpdate.FirstName;
                 AuthorInfix.Text = AuthorToUpdate.Infix;
                 AuthorLastname.Text = AuthorToUpdate.LastName;
-                AuthorUpdateButton.Tag = AuthorId;
+                AuthorUpdateButton.Tag = AuthorId; // Author.Id will be in the button tag
             }
         }
 
+        // Updates the author  
         private void UpdateAuthor(object sender, RoutedEventArgs e)
         {
+            // Get author.id from button tag
             Button Btn = sender as Button;
             Guid AuthorId = new Guid(Btn.Tag.ToString());
 

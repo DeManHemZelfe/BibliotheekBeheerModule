@@ -32,6 +32,7 @@ namespace BibliotheekBeheerModule.View
             DataContext = this;
         }
 
+        // Import data from database
         public void Init()
         {
             TableDbContext tableDbContext = new TableDbContext();
@@ -40,9 +41,9 @@ namespace BibliotheekBeheerModule.View
             Types = new ObservableCollection<Type>(tableDbContext.Types);
         }
 
+        // Get author and item data and place it inside the fields
         public void GetItemToUpdate(Guid ItemId)
         {
-
             using (var db = new TableDbContext())
             {
                 var ItemToUpdate = db.Items.Find(ItemId);
@@ -55,22 +56,25 @@ namespace BibliotheekBeheerModule.View
             }
         }
 
+        // Update item
         private void UpdateItem(object sender, RoutedEventArgs e)
         {
+            // Get item id from button tag
             Button Btn = sender as Button;
             Guid ItemId = new Guid(Btn.Tag.ToString());
 
+            // Get author id by full name match
             Author matchingAuthor = Authors.FirstOrDefault(a => a.FullName == ItemAuthor.Text.ToString());
 
             using (var db = new TableDbContext())
             {
-                var ItemToUpdate = db.Items.Find(ItemId);
+                var ItemToUpdate = db.Items.Find(ItemId); // Get item to update using item id
                 if (ItemToUpdate != null)
                 {
                     ItemToUpdate.Name = ItemTitle.Text.Trim();
                     ItemToUpdate.Type = ItemType.Text.Trim();
                     ItemToUpdate.Description = ItemDescription.Text.Trim();
-                    ItemToUpdate.AuthorId = matchingAuthor.Id;
+                    ItemToUpdate.AuthorId = matchingAuthor.Id; // Use author id as foreign key to refer to item object
                     db.SaveChanges();
                 }
             }

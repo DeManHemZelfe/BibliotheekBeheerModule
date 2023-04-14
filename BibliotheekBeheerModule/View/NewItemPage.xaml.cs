@@ -30,6 +30,8 @@ namespace BibliotheekBeheerModule.View
             Init();
             DataContext = this;
         }
+
+        // Import data from database
         public void Init()
         {
             TableDbContext tableDbContext = new TableDbContext();
@@ -40,7 +42,7 @@ namespace BibliotheekBeheerModule.View
 
         private void AddNewItem(object sender, RoutedEventArgs e)
         {
-
+            // Get Author id byt matching the full name.
             Author matchingAuthor = Authors.FirstOrDefault(a => a.FullName == itemAuthor.Text.ToString());
 
             using (var db = new TableDbContext())
@@ -51,7 +53,7 @@ namespace BibliotheekBeheerModule.View
                     Name = itemTitle.Text.ToString().Trim(),
                     Type = itemType.Text.ToString().Length < 1 ? "CD" : itemType.Text.ToString().Trim(),
                     Description = itemDescription.Text.ToString().Trim(),
-                    AuthorId = matchingAuthor.Id,
+                    AuthorId = matchingAuthor.Id, // Use author id to refer to the author object
                 };
                 db.Items.Add(item);
                 db.SaveChanges();

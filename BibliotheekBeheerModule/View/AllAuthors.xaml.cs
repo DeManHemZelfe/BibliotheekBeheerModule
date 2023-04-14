@@ -30,6 +30,7 @@ namespace BibliotheekBeheerModule.View
             Init();
             DataContext = this;
         }
+        // Import all authors from database
         private void Init()
         {
             TableDbContext tableDbContext = new TableDbContext();
@@ -37,22 +38,25 @@ namespace BibliotheekBeheerModule.View
         }
         private void UpdateRow(object sender, RoutedEventArgs e)
         {
+            // Get that row that contains the clicked update button
             var Button = (Button)sender;
             var Row = FindVisualParent<DataGridRow>(Button);
             var Author = (Author)Row.DataContext;
 
+            // Open update author window
             UpdateAuthorPage updateWindow = new UpdateAuthorPage();
             updateWindow.Show();
             updateWindow.GetAuthorToUpdate(Author.Id);
             this.Close();
         }
-
         private void DeleteRow(object sender, RoutedEventArgs e)
         {
+            // Get that row that contains the clicked delete button
             var Button = (Button)sender;
             var Row = FindVisualParent<DataGridRow>(Button);
             var Author = (Author)Row.DataContext;
 
+            // Find author in database and delete it
             using (var db = new TableDbContext())
             {
                 var authorToDelete = db.Authors.Find(Author.Id);
@@ -62,16 +66,19 @@ namespace BibliotheekBeheerModule.View
                     db.Authors.Remove(authorToDelete);
                     db.SaveChanges();
                 }
-                Console.WriteLine(Author.FullName + " Removed");
                 Authors.Remove(Author);
             }
         }
+
+        // Navigate to previous page
         private void PrevPage(object sender, RoutedEventArgs e)
         {
             MainWindow window = new MainWindow();
             window.Show();
             this.Close();
         }
+
+        // Function that returns the parent row as a datagridrow
         private DataGridRow FindVisualParent<DataGridRow>(DependencyObject obj) where DataGridRow : DependencyObject
         {
             DependencyObject parent = VisualTreeHelper.GetParent(obj);

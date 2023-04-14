@@ -30,6 +30,8 @@ namespace BibliotheekBeheerModule.View
             Init();
             DataContext = this;
         }
+
+        // Importing tables from database
         public void Init()
         {
             TableDbContext tableDbContext = new TableDbContext();
@@ -37,6 +39,7 @@ namespace BibliotheekBeheerModule.View
             Authors = new ObservableCollection<Author>(tableDbContext.Authors);
             Types = new ObservableCollection<Type>(tableDbContext.Types);
         }
+        // Adding a new Author 
         private void AddAuthor(object sender, RoutedEventArgs e)
         {
             using (var db = new TableDbContext())
@@ -49,24 +52,26 @@ namespace BibliotheekBeheerModule.View
                     LastName = authorLastname.Text.ToString().Trim(),
                 };
                 db.Authors.Add(author);
+                // Saves the new state of the database after adding a new author.
                 db.SaveChanges();
             }
             BackToMainMenu();
         }
+
+        // Navigates the user to the main window whenever it clicks the back button 
         private void PrevPage(object sender, RoutedEventArgs e)
         {
             MainWindow window = new MainWindow();
             window.Show();
             this.Close();
         }
+        // Navigates the user to the main window whenever it creates a new author
         private void BackToMainMenu()
         {
             MainWindow window = new MainWindow();
             window.Show();
             this.Close();
         }
-
-
 
         private ObservableCollection<Type> _types;
 
